@@ -68,16 +68,41 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // =========================
-    // トップニュースで速報追加
+// ニュース開閉関数（外に出す）
+// =========================
+function addNewsToggle(news){
+
+    const title = news.querySelector(".news-title");
+    const body = news.querySelector(".news-body");
+
+    if(title && body){
+        title.addEventListener("click", () => {
+            body.style.display =
+            body.style.display === "block" ? "none" : "block";
+        });
+    }
+
+}
+
+// =========================
+// トップページだけで動かす
+// =========================
+if(document.body.id === "topPage"){
+
+    const main = document.querySelector("main");
+
     // =========================
-    if(document.body.id === "topPage") {
-        if(!document.querySelector(".urgent-news")) {
-            const main = document.querySelector("main");
-            if(main) {
-                const urgentNews = document.createElement("article");
-                urgentNews.className = "news-item urgent-news";
-                urgentNews.innerHTML = `
-                    <div class="news-content">
+    // 復元処理（ページ読み込み時）
+    // =========================
+    if(localStorage.getItem("urgentNews") === "true"){
+
+        if(main && !document.querySelector(".urgent-news")){
+
+            const urgentNews = document.createElement("article");
+            urgentNews.className = "news-item urgent-news";
+
+            urgentNews.innerHTML = `
+            <div class="news-content">
                         <img src="img/Component 1.png" alt="探偵死亡速報" class="news-img">
 
                         <div class="news-text">
@@ -100,23 +125,61 @@ document.addEventListener("DOMContentLoaded", () => {
                         </div>
                     </div>
                     `;
-                main.prepend(urgentNews);
 
-                const title = urgentNews.querySelector(".news-title");
-                const body = urgentNews.querySelector(".news-body");
-
-                title.addEventListener("click", () => {
-
-                    if(body.style.display === "block"){
-                        body.style.display = "none";
-                            }else{
-                                body.style.display = "block";
-                            }
-
-                    });
-            }
+            main.prepend(urgentNews);
+            addNewsToggle(urgentNews); // ←超重要
         }
     }
+
+    // =========================
+    // クリックで出現
+    // =========================
+    const importantNews = document.querySelector(".important-news");
+
+    if(importantNews){
+
+        importantNews.addEventListener("click", () => {
+
+            if(localStorage.getItem("urgentNews") === "true") return;
+
+            const urgentNews = document.createElement("article");
+            urgentNews.className = "news-item urgent-news";
+
+            urgentNews.innerHTML = `
+            <div class="news-content">
+                        <img src="img/Component 1.png" alt="探偵死亡速報" class="news-img">
+
+                        <div class="news-text">
+
+                            <h2 class="news-title">
+                            世界的名探偵Mr. Michael、死亡しているのが発見される
+                            </h2>
+
+                                <p class="news-body">
+                                世界No.1とも称される名探偵、Mr. Michael（ミスター・マイケル）が死亡しているのが発見されました。<br>
+                                警察によりますと、Mr. Michaelは自身の事務所で倒れているところを関係者により発見され、その場で死亡が確認されたということです。<br>
+
+                                現場の状況から、何者かに殺害された可能性が高いとみられており、警察は事件として捜査を進めています。<br>
+
+                                関係者によると、Mr. Michaelは死亡する直前まである重大な事件を追っていたとされ、その調査の途中で何者かに襲われた可能性もあるとみられています。<br>
+
+                                警察は、事件との関連を含めて詳しい経緯を調べています。
+                                </p>
+
+                        </div>
+                    </div>
+                    `;
+
+            main.prepend(urgentNews);
+            addNewsToggle(urgentNews); // ←これないと開けない
+
+            localStorage.setItem("urgentNews", "true");
+
+        });
+
+    }
+
+}
 
     // =========================
     // メールボックス初回ハッキング制御
