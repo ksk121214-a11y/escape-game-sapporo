@@ -487,4 +487,22 @@ text-decoration:underline;
         width: 80px;
         height: 80px;
     }
+
+    .email-header {
+        flex-direction: row; /* ←これ重要 */
+        align-items: center;
+        flex-wrap: wrap; /* はみ出たら折り返す */
+        gap: 5px;
+    }
+
+    .email-from,
+    .email-subject,
+    .email-date {
+        font-size: 0.75rem; /* 少し小さく */
+    }
+
+    .email-date {
+        text-align: right;
+        margin-left: auto; /* ←右寄せ */
+    }
 }
