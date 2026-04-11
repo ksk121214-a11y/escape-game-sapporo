@@ -456,6 +456,31 @@ text-decoration:underline;
 }
 
 /* ==========================
+   ピアノ
+========================= */
+.piano {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.key {
+    width: 40px;
+    height: 150px;
+    background: white;
+    border: 1px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.key:active {
+    background: #ddd;
+}
+
+/* ==========================
    スマホ対応
 ========================= */
 @media (max-width: 400px) {

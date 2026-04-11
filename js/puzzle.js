@@ -34,4 +34,49 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+   // =========================
+    // piano
+    // =========================
+
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    const audioCtx = new AudioContext();
+
+    function playSound(freq){
+
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.frequency.value = freq;
+        osc.type = "sine";
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start();
+
+        gain.gain.setValueAtTime(1, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1);
+
+        osc.stop(audioCtx.currentTime + 1);
+    }
+
+    const notes = {
+        C: 261,
+        D: 294,
+        E: 329,
+        F: 349,
+        G: 392,
+        A: 440,
+        B: 493,
+        C2: 523
+    };
+
+    document.querySelectorAll(".key").forEach(key => {
+        key.addEventListener("click", () => {
+
+            const note = key.dataset.note;
+            playSound(notes[note]);
+
+        });
+    });
 });
