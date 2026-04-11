@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>博士からのメール</title>
+<link rel="stylesheet" href="css/style.css">
+<script defer src="js/main.js"></script>
+</head>
+<body>
+
+<header>
+    <div class="mailbox-title">
+        <img src="img/Component 1.png" class="mail-icon">
+    <div class="title-text">
+        <h1>MAIL BOX</h1>
+        <p class="mail-owner">Michael</p>
+    </div>
+    </div>
+    <div class="header-buttons">
+        <button class="menu-btn" id="menuBtn">☰</button>
+        <button id="resetBtn">リセット</button>
+    </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu">
+    <a href="index.html">TOP NEWS</a>
+    <a href="mailbox.html">MAIL BOX</a>
+    <a href="puzzle.html">謎解きページ</a>
+    <a href="hint.html">速報</a>
+</nav>
+
+<main>
+    <section class="email-section">
+        <ul class="email-list">
+            <!-- 緊急未読メール -->
+            <li class="email-item unread">
+                <div class="email-header">
+                    <span class="unread-dot"></span>
+                    <span class="email-from">From: Dr. Adrian Heinrich</span>
+                    <span class="email-subject">Subject: URGENT</span>
+                    <span class="email-date">2026/04/07 12:34</span>
+                </div>
+                <div class="email-body">
+                    <p>Mr. Michael</p><br>
+                    <p> </p>
+                    <p>突然の連絡をお許しください。<br>
+                        先日、あなたが世界各地で発生している謎のウイルスについて独自に調査を行っていることを、私の知人から小耳に挟みました。<br>
+                        私はウイルス研究に携わる者ですが、最近の調査で判明したことがあります。<br>
+                        今回のウイルスは自然発生ではなく、人工的に作られた可能性が極めて高いということです。<br>
+                        さらに、あるテロ組織がこのウイルスを秘密裏に利用しており<br>
+                        次の標的が<br>"札幌"<br>であることが分かりました。装置が街に設置されている可能性もあります。<br>
+                        警察や政府の中にも協力者がいるかもしれず、信頼できる人物は非常に限られています。<br>
+                        私が唯一信頼できると考えるのは、あなたです。<br>
+                        どうか、事態を未然に防ぐため、調査をお願いします。時間は残されていません。</p><br>
+                    <p>Dr. Adrian Heinrich</p>
+                    
+                    <div class="reply-box">
+                    <textarea id="replyText" placeholder="返信を入力..."></textarea>
+                    <button id="sendReply">送信</button>
+
+                    </div>
+                </div>
+            </li>
+
+            <!-- 既読メール -->
+            <li class="email-item">
+                <div class="email-header">
+                    <span class="email-from">From: Detective Sato</span>
+                    <span class="email-subject">Subject: 密室事件の相談</span>
+                    <span class="email-date">2026/02/11 08:42</span>
+                </div>
+                <div class="email-body">
+                    現在捜査中の事件についてご相談があります。<br>被害者は自宅の書斎で死亡していましたが、部屋は内側から完全に施錠されていました。<br>いわゆる密室状態です。ぜひ一度現場を見ていただけないでしょうか。
+                </div>
+            </li>
+
+            <!-- 送信メール例 -->
+            <li class="email-item sent">
+                <div class="email-header">
+                    <span class="email-from">↪ From: Mr. Michael</span>
+                    <span class="email-subject">Subject: Re: 密室事件の相談</span>
+                    <span class="email-date">2026/02/11 09:01</span>
+                </div>
+                <div class="email-body">
+                    了解しました。現場の資料をまとめておいてください。すぐに向かいます。
+                </div>
+            </li>
+
+            <li class="email-item">
+                <div class="email-header">
+                    <span class="email-from">From: Lady Eleanor Whitmore</span>
+                    <span class="email-subject">Subject:  パーティーへの招待</span>
+                    <span class="email-date">2026/02/18 19:30</span>
+                </div>
+                <div class="email-body">
+                    突然のご連絡失礼します。<br>来週末、私の邸宅で小さなパーティーを開催します。<br>各界の著名人が集まる予定です。<br>もしご都合がよろしければ、ぜひご参加ください。
+                </div>
+            </li>
+
+            <!-- 送信メール例 -->
+            <li class="email-item sent">
+                <div class="email-header">
+                    <span class="email-from">↪ From: Mr. Michael</span>
+                    <span class="email-subject">Subject: Re: パーティーへの招待</span>
+                    <span class="email-date">2026/02/18 19:46</span>
+                </div>
+                <div class="email-body">
+                    招待ありがとうございます。時間が取れそうです。当日伺います。
+                </div>
+            </li>
+
+            <li class="email-item">
+                <div class="email-header">
+                    <span class="email-from">From: Metropolitan Police</span>
+                    <span class="email-subject">Subject: 協力依頼</span>
+                    <span class="email-date">2026/02/25 10:12</span>
+                </div>
+                <div class="email-body">
+                    現在進行中の連続窃盗事件について、あなたの推理力をお借りしたく連絡しました。<br>犯行の手口が非常に巧妙で、通常の捜査では突破口が見つかっていません。
+                </div>
+            </li>
+
+            <!-- 送信メール例 -->
+            <li class="email-item sent">
+                <div class="email-header">
+                    <span class="email-from">↪ From: Mr. Michael</span>
+                    <span class="email-subject">Subject: Re: 協力依頼</span>
+                    <span class="email-date">2026/02/25 10:27</span>
+                </div>
+                <div class="email-body">
+                    内容を確認しました。捜査資料を用意しておいてください。後ほど伺います。
+                </div>
+            </li>
+
+            <li class="email-item">
+                <div class="email-header">
+                    <span class="email-from">From: Professor Hayashi</span>
+                    <span class="email-subject">Subject: 奇妙な出来事について</span>
+                    <span class="email-date">2026/03/01 13:05</span>
+                </div>
+                <div class="email-body">
+                    大学の研究室で奇妙な出来事が起きています。<br>重要な研究資料が、鍵のかかった保管庫から何度も消えているのです。<br>内部犯行の可能性もあり、困っています。
+                </div>
+            </li>
+
+            <!-- 送信メール例 -->
+            <li class="email-item sent">
+                <div class="email-header">
+                    <span class="email-from">↪ From: Mr. Michael</span>
+                    <span class="email-subject">Subject: Re: 奇妙な出来事について</span>
+                    <span class="email-date">2026/02/25 10:27</span>
+                </div>
+                <div class="email-body">
+                    内容を確認しました。捜査資料を用意しておいてください。後ほど伺います。
+                </div>
+            </li>
+
+            <li class="email-item">
+                <div class="email-header">
+                    <span class="email-from">From: Client K</span>
+                    <span class="email-subject">Subject: 人探しの依頼</span>
+                    <span class="email-date">2026/03/03 22:41</span>
+                </div>
+                <div class="email-body">
+                    ある人物を探していただきたいのです。10年前に突然姿を消しました。警察にも相談しましたが手がかりがありません。どうか力を貸してください。
+                </div>
+            </li>
+
+            <!-- 送信メール例 -->
+            <li class="email-item sent">
+                <div class="email-header">
+                    <span class="email-from">↪ From: Mr. Michael</span>
+                    <span class="email-subject">Subject: Re: 人探しの依頼</span>
+                    <span class="email-date"></span>
+                </div>
+                <div class="email-body">
+                    依頼を受けます。対象人物の資料を用意しておいてください。すぐに向かいます。
+                </div>
+            </li>
+
+            <li class="email-item">
+                <div class="email-header">
+                    <span class="email-from">From: Art Museum Security</span>
+                    <span class="email-subject">Subject: 絵画盗難事件</span>
+                    <span class="email-date">2026/03/08 09:50</span>
+                </div>
+                <div class="email-body">
+                    昨夜、当館の展示室から絵画が1点盗まれました。<br>警備は厳重だったはずなのですが、犯人の侵入経路が分かりません。<br>専門家として意見を伺えれば幸いです。
+                </div>
+            </li>
+
+            <!-- 送信メール例 -->
+            <li class="email-item sent">
+                <div class="email-header">
+                    <span class="email-from">↪ From: Mr. Michael</span>
+                    <span class="email-subject">Subject: Re: 絵画盗難事件</span>
+                    <span class="email-date">2026/03/08 10:11</span>
+                </div>
+                <div class="email-body">
+                    報告を確認しました。警備記録と展示室の資料を準備しておいてください。現場を見ます。
+                </div>
+            </li>
+        </ul>
+    </section>
+</main>
+
+<footer>
+    <p>© 2026 GLOBAL NEWS NETWORK</p>
+</footer>
+
+</body>
+</html>

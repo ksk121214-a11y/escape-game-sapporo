@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>街の謎解き</title>
+<link rel="stylesheet" href="css/style.css">
+<script defer src="js/puzzle.js"></script>
+</head>
+<body id="puzzlePage">
+
+<header>
+    <h1>街の謎解き</h1>
+    <button class="menu-btn" id="menuBtn">☰</button>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu">
+    <a href="index.html">トップニュース</a>
+    <a href="mailbox.html">博士からのメール</a>
+    <a href="puzzle.html">謎解きページ</a>
+    <a href="hint.html">速報</a>
+</nav>
+
+<main>
+    <section class="puzzle-section">
+        <h2>暗号入力</h2>
+        <p>6桁の数字を入力してください。</p>
+
+        <div class="puzzle-input">
+            <input type="text" id="puzzleCode" placeholder="例: 123456" maxlength="6">
+            <button id="submitPuzzle">送信</button>
+        </div>
+
+        <div id="puzzleResult" class="puzzle-result"></div>
+    </section>
+</main>
+
+<footer>
+    <p>© 2026 世界ニュース速報</p>
+</footer>
+
+</body>
+</html>

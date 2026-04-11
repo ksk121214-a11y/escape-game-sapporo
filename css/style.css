@@ -1,0 +1,480 @@
+@charset "UTF-8";
+
+/* ==========================
+   共通スタイル
+========================= */
+body, h1, h2, p, a {
+    font-family: "Yu Gothic", "メイリオ", sans-serif;
+    font-weight: 400;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+body.top-page {
+    background-color: #2b5bd3; /* トップページだけ背景色を変更 */
+}
+
+/* ==========================
+   ヘッダー
+========================= */
+header {
+    background: #222;
+    color: #fff;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+}
+
+header h1 {
+    font-size: 1.6rem;
+    color: #fff;
+    margin: 0;
+    line-height: 1;
+}
+
+.menu-btn {
+    font-size: 2rem;
+    background: none;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+/* ==========================
+   MAIL BOX ヘッダー
+========================= */
+
+.mailbox-title{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.mail-icon{
+width:40px;
+height:40px;
+border-radius:50%;
+object-fit:cover;
+}
+
+.title-text{
+display:flex;
+flex-direction:column;
+}
+
+.title-text h1{
+margin:0;
+font-size:1.4rem;
+color:#fff;
+}
+
+.mail-owner{
+font-size:0.75rem;
+color:#bbb;
+margin:0;
+}
+
+/* 未読ポッチ */
+
+.unread-dot{
+
+width:10px;
+height:10px;
+
+background:red;
+
+border-radius:50%;
+
+display:inline-block;
+
+margin-right:8px;
+
+}
+
+/* ==========================
+   モバイルメニュー
+========================= */
+.mobile-menu {
+    display: none;
+    flex-direction: column;
+    background: #333;
+}
+
+.mobile-menu a {
+    display: block;
+    padding: 10px 15px;
+    color: #fff;
+}
+
+.mobile-menu a:hover {
+    background: #444;
+}
+
+/* ==========================
+   ニュース記事
+========================= */
+.news-item {
+    background: #fff;
+    padding: 15px;
+    margin: 15px auto; /* 上下に余白、中央寄せ */
+    border-left: 4px solid #222;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    width: 90%;
+    max-width: 500px; /* 幅に余裕を持たせる */
+}
+
+/* 先頭ニュース用横並び */
+.news-content {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.news-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+.news-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.news-text h2 {
+    font-size: 1.2rem;
+    margin: 0 0 5px 0;
+}
+
+.news-text p {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* 重要ニュースリンク */
+
+.news-item.urgent-news {
+    background-color: #DC2626; /* 赤 */
+    color: #FFFFFF;             /* 文字は白 */
+    border-radius: 6px;
+    margin-bottom: 15px;
+    padding: 20px;
+}
+
+.news-item.urgent-news .news-text h2,
+.news-item.urgent-news .news-text p {
+    color: #FFFFFF; /* 見出しと本文も白に */
+}
+
+
+.important-news h2 a {
+    color: #222;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.important-news h2 a:hover {
+    text-decoration: underline;
+}
+
+/* ==========================
+   フッター
+========================= */
+footer {
+    background: #222;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 20px;
+}
+
+footer p {
+    color: #fff;
+}
+
+/* ==========================
+   メールリスト風スタイル
+========================= */
+.email-section {
+    padding: 15px 20px;
+}
+
+.email-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.email-item {
+    border-bottom: 1px solid #ccc;
+    padding: 15px 20px;
+    cursor: pointer;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    background: #f8f9fa; /* 既読メールの薄い背景 */
+}
+
+.email-item.unread {
+    font-weight: bold;
+    background: #fff; /* 未読メールは白く */
+}
+
+.email-item.sent {
+    background: #cce5ff; /* 送信メールは薄い青 */
+}
+
+.email-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.email-from, .email-to {
+    font-size: 0.85rem;
+    color: #555;
+    flex: 1 1 150px;
+}
+
+.email-subject {
+    flex: 2 1 200px;
+    font-weight: inherit;
+}
+
+.email-date {
+    font-size: 0.8rem;
+    color: #555;
+    flex: 0 0 120px;
+    text-align: right;
+}
+
+.email-attachment {
+    font-size: 1rem;
+}
+
+.email-body {
+    display: none;
+    margin-top: 10px;
+    font-size: 0.95rem;
+    color: #333;
+    line-height: 1.5;
+}
+
+/* 展開状態 */
+.email-item.open .email-body {
+    display: block;
+}
+
+/* 返信 */
+.reply-box{
+margin-top:15px;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.reply-box textarea{
+width:100%;
+height:80px;
+padding:10px;
+font-size:14px;
+resize:none;
+}
+
+.reply-box button{
+align-self:flex-end;
+padding:6px 14px;
+cursor:pointer;
+}
+
+/* ==========================
+   謎解きページ
+========================= */
+.puzzle-section {
+    padding: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.puzzle-section h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-bottom: 2px solid #222;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.puzzle-input {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.puzzle-input input {
+    padding: 8px;
+    font-size: 1rem;
+    width: 120px;
+    text-align: center;
+}
+
+.puzzle-input button {
+    padding: 8px 12px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.puzzle-result {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #d9534f; /* 赤文字 */
+}
+
+/* ==========================
+   ニュース詳細ページ
+========================= */
+.news-detail {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: center;
+    line-height: 1.6;
+}
+
+.news-detail img {
+    display: block;
+    margin: 0 auto 20px auto;
+    max-width: 50%;
+    height: auto;
+    border-radius: 6px;
+}
+
+.news-detail h1 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.news-detail p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.back-btn {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 8px 12px;
+    background: #222;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.back-btn:hover {
+    background: #444;
+}
+
+.news-body{
+display:none;
+margin-top:10px;
+line-height:1.6;
+}
+
+.news-title{
+cursor:pointer;
+}
+
+.news-title:hover{
+text-decoration:underline;
+}
+
+/* ==========================
+   速報
+========================= */
+.hint-card {
+    background-color: white;
+    padding: 20px;
+    margin: 15px 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.hint-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hint-btn {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.hint-content {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #007bff;
+}
+/* ==========================
+   メールログイン
+========================= */
+
+.hidden { display: none; }
+
+.terminal-screen {
+    background-color: black;
+    color: lime;
+    font-family: monospace;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+#hackingScreen {
+    background-color: black;
+    color: lime;
+    font-family: monospace;
+    height: 80vh;
+    overflow: hidden;
+    padding: 20px;
+}
+
+/* ==========================
+   スマホ対応
+========================= */
+@media (max-width: 400px) {
+    .news-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .news-img {
+        width: 100%;
+        height: auto;
+    }
+
+    .email-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .email-date {
+        text-align: left;
+        margin-top: 3px;
+    }
+}

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Hacking...</title>
+
+<style>
+
+html,body{
+margin:0;
+padding:0;
+background:black;
+overflow:hidden;
+font-family:monospace;
+}
+
+/* コードエリア */
+
+#hackContainer{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+color:#00ff00;
+padding:20px;
+font-size:16px;
+line-height:1.4;
+}
+
+/* 成功メッセージ */
+
+#success{
+
+position:fixed;
+
+top:50%;
+left:50%;
+
+transform:translate(-50%,-50%);
+
+color:#00ff00;
+
+font-size:60px;
+
+font-family:monospace;
+
+text-align:center;
+
+display:none;
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="hackContainer"></div>
+
+<div id="success">
+HACKING SUCCESS
+</div>
+
+<script>
+
+const container = document.getElementById("hackContainer");
+
+/* ハッキング風コード */
+
+const codeLines = [
+
+"import socket, sys, os, threading, hashlib, base64, time",
+"def connect_server(host, port): s = socket.socket(socket.AF_INET, socket.SOCK_STREAM); s.connect((host, port)); return s",
+"def bypass_firewall(packet): encrypted = hashlib.sha256(packet.encode()).hexdigest(); return encrypted",
+"def decrypt_payload(data): return base64.b64decode(data).decode('utf-8')",
+"SELECT id, username, password FROM users WHERE access_level='admin';",
+"sudo override_security_protocol --force --bypass-authentication --inject-root",
+"ssh root@192.168.1.24 -p 22 -o StrictHostKeyChecking=no",
+"for packet in incoming_stream: process(packet); decrypt(packet); send(server)",
+"system.exec('/usr/bin/access_mailbox --download-all --override-firewall')",
+"connection.established(remote_host='mail.server.local', protocol='ssh', encryption='AES256')",
+"bruteforce_engine.start(target='mailbox_root', threads=64, timeout=120)",
+"if firewall.status == 'active': firewall.disable(); log('firewall bypassed successfully')",
+"database.query(\"SELECT * FROM mailbox_messages WHERE confidential=true ORDER BY timestamp DESC\")",
+"upload_payload('/tmp/rootkit.bin'); execute('/tmp/rootkit.bin --install --stealth')",
+"packet_stream.map(decrypt).filter(valid).forEach(send_to_server)",
+"access_control.override(user='root', privileges='all', persistent=true)",
+"inject_payload(buffer, offset=0xFFAC12, exploit='CVE-2029-1182')",
+"while connection.active: receive_packet(); decode(); forward(); log_event()",
+"remote.exec('tar -czf mailbox_dump.tar.gz /var/mail/root/')",
+"scp root@mail.server:/var/mail/root/mailbox_dump.tar.gz ./downloads/"
+
+];
+
+/* コード生成 */
+
+function randomCode(){
+
+const random =
+Math.random().toString(36).substring(2,12);
+
+return random;
+
+}
+
+/* コードを流す */
+
+const interval = setInterval(()=>{
+
+let line;
+
+if(Math.random() < 0.6){
+
+line = codeLines[Math.floor(Math.random()*codeLines.length)];
+
+}else{
+
+line = randomCode();
+
+}
+
+const p = document.createElement("div");
+
+p.textContent = line;
+
+container.appendChild(p);
+
+/* 下まで来たら上を削除 */
+
+if(container.children.length > 40){
+
+container.removeChild(container.children[0]);
+
+}
+
+},80);
+
+
+/* 成功演出 */
+
+setTimeout(()=>{
+
+clearInterval(interval);
+
+/* 画面を真っ黒に */
+
+document.getElementById("hackContainer").style.display = "none";
+
+/* SUCCESS表示 */
+
+const success = document.getElementById("success");
+
+success.style.display = "block";
+
+document.body.style.background = "black";
+
+/* 次ページ */
+
+setTimeout(()=>{
+
+localStorage.setItem("mailboxUnlocked","true");
+
+window.location.href = "mailbox.html";
+
+},2500);
+
+},7000);
+
+</script>
+
+</body>
+</html>
