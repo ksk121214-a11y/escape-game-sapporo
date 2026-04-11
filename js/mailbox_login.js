@@ -142,6 +142,9 @@ enter c:
 
 terminalStage = 1;
 
+input.value = "";
+terminalBuffer = "";
+
 }else{
 
 terminalResult.textContent = "Access denied.";
@@ -161,6 +164,9 @@ return;
 if(terminalStage === 1){
 
 if(terminalBuffer.trim() === "10"){
+
+input.value = "";
+terminalBuffer = "";
 
 startHack();
 
