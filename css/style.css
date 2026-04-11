@@ -477,4 +477,14 @@ text-decoration:underline;
         text-align: left;
         margin-top: 3px;
     }
+
+    .news-content {
+        flex-direction: row; /* ←これに変更 */
+        align-items: center;
+    }
+
+    .news-img {
+        width: 80px;
+        height: 80px;
+    }
 }

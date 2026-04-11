@@ -8,6 +8,8 @@ const terminal = document.getElementById("terminal");
 
 const runBtn = document.getElementById("runBtn");
 
+const input = document.getElementById("terminalInput");
+
 const cursor = document.getElementById("terminalCursor");
 const terminalResult = document.getElementById("terminalResult");
 
@@ -118,9 +120,9 @@ cursor.textContent = terminalBuffer + "_";
 /* ===== 実行ボタン ===== */
 
 runBtn.addEventListener("click",()=>{
-
-runTerminal();
-
+    terminalBuffer = input.value;
+    runTerminal();
+    input.value = "";
 });
 
 
