@@ -168,9 +168,11 @@ function play(file) {
     new Audio(file).play();
 }
 
-function setDisplay(text) {
+function setDisplay(text = "") {
     document.getElementById("display").textContent = text;
 }
+
+setDisplay("");
 
 // 入力
 function press(n) {
@@ -230,10 +232,7 @@ function call() {
         setTimeout(() => {
             setDisplay("通話中");
 
-            // 🔥少し遅らせて確実に再生
-            setTimeout(() => {
-                speak("暗号機密センターです。暗号を知りたい方は1を、一発ギャグを聞きたい方は2を、押してください。");
-            }, 200);
+            speak("暗号機密センターです。暗号を知りたい方は1を、一発ギャグを聞きたい方は2を、押してください。");
 
             stage = 2;
             number = "";
