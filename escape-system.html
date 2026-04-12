@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>解析システム</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    background: #000;
+    color: #00aaff;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+/* メニュー */
+.menu-btn {
+    padding: 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.sidebar {
+    display: none;
+    background: #001a2a;
+}
+
+.sidebar.open {
+    display: block;
+}
+
+.floor {
+    padding: 12px;
+    border-bottom: 1px solid #00aaff;
+    cursor: pointer;
+}
+
+.floor:hover {
+    background: #003355;
+}
+
+/* メイン */
+.main {
+    text-align: center;
+    padding: 30px;
+}
+
+input {
+    padding: 10px;
+    width: 200px;
+    border: 2px solid #00aaff;
+    background: black;
+    color: #00aaff;
+    text-align: center;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px;
+    width: 140px;
+    background: #003355;
+    color: #00aaff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #005577;
+}
+
+/* 問題文 */
+#problem {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+/* XY */
+.xy-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.xy-row span {
+    font-size: 20px;
+}
+
+.xy-row input {
+    width: 120px;
+    font-size: 18px;
+}
+
+/* 状態 */
+#status, #result {
+    margin-top: 15px;
+    letter-spacing: 2px;
+}
+
+/* 🔥 入力中央固定 */
+.input-container {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 🔥 幅統一 */
+input {
+    width: 260px;
+    max-width: 80vw;
+}
+
+/* 🔥 ボタンも揃える */
+button {
+    width: 260px;
+    max-width: 80vw;
+}
+
+/* 🔥 XY */
+.xy-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.xy-block label {
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+/* ローディング */
+.loading {
+    animation: blink 0.8s infinite;
+}
+
+/* 🔥 全体の余白アップ */
+.input-container {
+    margin-top: 60px; /* ←増やす */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px; /* ←ここで縦間隔を一括管理 */
+}
+
+/* 🔥 入力欄 */
+input {
+    width: 260px;
+    max-width: 80vw;
+    padding: 12px;
+    font-size: 16px;
+}
+
+/* 🔥 ボタン（少し小さく） */
+button {
+    width: 200px; /* ←小さく */
+    max-width: 70vw;
+    padding: 8px; /* ←薄く */
+    font-size: 14px;
+}
+
+/* 🔥 XYブロック */
+.xy-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px; /* ←ラベルと入力の間 */
+    margin-bottom: 10px;
+}
+
+/* 🔥 XY同士の間隔 */
+#xyArea {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 🔥 問題文も余白増やす */
+#problem {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+/* 🔥 ステータスと結果 */
+#status, #result {
+    margin-top: 20px;
+}
+
+.phone-button {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #00aaff;
+    color: black;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 15px #00aaff;
+    transition: 0.2s;
+}
+
+.phone-button:hover {
+    background: #33bbff;
+    transform: scale(1.1);
+}
+
+.big-result {
+    font-size: 28px; /* ←ここで大きさ調整 */
+    letter-spacing: 5px;
+    margin-top: 20px;
+    color: #00ccff;
+}
+
+/* 7階入力 */
+.multi-input {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.input-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* スキャン画面 */
+.scan-area {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    margin: 20px auto;
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* スキャン枠 */
+.scan-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid #00aaff;
+    box-shadow: 0 0 15px #00aaff;
+}
+
+@keyframes blink {
+    50% { opacity: 0.3; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="menu-btn" onclick="toggleMenu()">☰ MENU</div>
+
+<div id="sidebar" class="sidebar">
+    <div class="floor" onclick="location.href='tokyu.html'">TOKYU</div>
+    <div class="floor" onclick="location.href='mailbox.html'">MAILBOX</div>
+</div>
+
+<div class="main">
+    <h1>ANALYSIS SYSTEM</h1>
+
+    <div class="input-container">
+
+    <!-- 通常入力 -->
+    <div id="mainInputArea">
+        <input id="input" placeholder="位置情報を入力">
+        <br>
+        <button onclick="analyze()">解析</button>
+    </div>
+
+    <!-- 10階 -->
+    <div id="xyArea" style="display:none;">
+        <div class="xy-block">
+            <label>X</label>
+            <input id="xInput">
+        </div>
+
+        <div class="xy-block">
+            <label>Y</label>
+            <input id="yInput">
+        </div>
+
+        <button onclick="checkXY()">解析</button>
+    </div>
+
+</div>
+
+    <!-- 🔥 ここ重要（順番） -->
+    <div id="status"></div>
+    <div id="problem"></div>
+    <div id="result"></div>
+
+
+    <!-- 電話 -->
+     <div id="phoneBtn" style="display:none;">
+        <button class="phone-button" onclick="openPhone()">
+            📞
+        </button>
+    </div>
+
+</div>
+
+<script src="js/escape-system.js"></script>
+</body>
+</html>

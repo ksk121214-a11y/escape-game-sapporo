@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // piano
     // =========================
 
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    /*const AudioContext = window.AudioContext || window.webkitAudioContext;
     const audioCtx = new AudioContext();
 
     function playSound(freq){
@@ -78,5 +78,5 @@ document.addEventListener("DOMContentLoaded", () => {
             playSound(notes[note]);
 
         });
-    });
+    });*/
 });
