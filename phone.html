@@ -89,7 +89,15 @@ body {
 /* 個別色 */
 .call { background: #34c759; }
 .delete { background: #555; }
-.replay { background: #0a84ff; display: none; }
+.replay {
+    background: #0a84ff;
+    color: white;
+
+    box-shadow: 0 0 15px #0a84ff, 0 0 30px #0a84ff;
+    border: 2px solid #0a84ff;
+
+    opacity: 1;
+}
 
 </style>
 </head>
@@ -138,11 +146,15 @@ let number = "";
 let stage = 0;
 
 function speak(text) {
-    speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
     u.lang = "ja-JP";
     u.rate = 0.9;
-    speechSynthesis.speak(u);
+
+    speechSynthesis.cancel();
+
+    setTimeout(() => {
+        speechSynthesis.speak(u);
+    }, 100);
 }
 
 function play(file) {
