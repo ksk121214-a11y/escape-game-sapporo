@@ -411,7 +411,7 @@ if(document.body.id === "topPage"){
 
                             ここに解除コードを入れなさい ↓<br><br>
 
-                            <a href="escape-system.html" style="color:#007bff;">▶ 謎解きページへ</a>
+                            <a href="escape-system.html" style="color:#007bff;">▶ 解析システムへ</a>
                         </div>
                         `;
 
