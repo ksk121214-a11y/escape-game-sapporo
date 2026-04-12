@@ -93,6 +93,8 @@ body {
     background: #0a84ff;
     color: white;
 
+    display: none;   /* ★これ必須 */
+
     opacity: 1;
 }
 
@@ -139,6 +141,13 @@ body {
 </div>
 
 <script>
+
+document.addEventListener("click", () => {
+    const u = new SpeechSynthesisUtterance("");
+    speechSynthesis.speak(u);
+    speechSynthesis.cancel();
+}, { once: true });
+
 let number = "";
 let stage = 0;
 
@@ -194,8 +203,6 @@ function press(n) {
             const btn = document.getElementById("replayBtn");
             if (btn) btn.style.display = "block";
 
-            number = "";
-            setDisplay("通話中");
         }
     }
 }
@@ -223,7 +230,10 @@ function call() {
         setTimeout(() => {
             setDisplay("通話中");
 
-            speak("暗号機密センターです。暗号を知りたい方は1を、一発ギャグを聞きたい方は2を、押してください。");
+            // 🔥少し遅らせて確実に再生
+            setTimeout(() => {
+                speak("暗号機密センターです。暗号を知りたい方は1を、一発ギャグを聞きたい方は2を、押してください。");
+            }, 200);
 
             stage = 2;
             number = "";
