@@ -147,11 +147,8 @@ function submitFloor7() {
             problem.textContent = "赤と青の間にありし、文字列をスキャンせよ";
 
             result.innerHTML = `
-                <div class="scan-area">
-                    <video id="camera" autoplay></video>
-                    <div class="scan-frame"></div>
-                </div>
-                <button onclick="startScan()">スキャン</button>
+                <div class="big-result">スキャンモード起動中...</div>
+                <button onclick="openScan()">スキャンを起動</button>
             `;
         }, true);
     } else {
@@ -247,3 +244,18 @@ function checkXY() {
 function openPhone() {
     location.href = "phone.html";
 }
+
+// スキャンへs
+function openScan() {
+    location.href = "scan.html";
+}
+
+window.addEventListener("load", () => {
+    const params = new URLSearchParams(location.search);
+
+    if (params.get("scan") === "ok") {
+        fakeLoading(() => {
+            result.innerHTML = `<div class="big-result">1234</div>`;
+        }, true);
+    }
+});
