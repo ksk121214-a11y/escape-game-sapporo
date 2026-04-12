@@ -103,7 +103,6 @@ body {
 
 <body>
 
-<button class="back-btn" onclick="goBack()">← 戻る</button>
 
 <div class="container">
 
@@ -134,7 +133,7 @@ body {
     <!-- 下ボタン -->
     <div class="controls">
         <button class="ctrl-btn delete" onclick="deleteLast()">⌫</button>
-        <button class="ctrl-btn call" onclick="call()">📞</button>
+        <button class="ctrl-btn call" onclick="toggleCall()">📞</button>
         <button id="replayBtn" class="ctrl-btn replay" onclick="playCode()">▶</button>
     </div>
 
@@ -150,6 +149,7 @@ document.addEventListener("click", () => {
 
 let number = "";
 let stage = 0;
+let isCalling = false;
 
 setDisplay("通話中");
 function speak(text) {
@@ -222,7 +222,13 @@ function playCode() {
 
 // 発信
 function call() {
+
+    // 🔥すでに通話中なら終了
+    if (isCalling) return;
+
     if (number !== "0120763954") return;
+
+    isCalling = true;
 
     setDisplay("発信中...");
 
@@ -241,9 +247,18 @@ function call() {
     }, 800);
 }
 
-function goBack() {
-    location.href = "escape-system.html";
+function toggleCall() {
+
+    // 🔥通話中なら終了
+    if (isCalling) {
+        speechSynthesis.cancel(); // 音声停止
+        location.href = "escape-system.html";
+        return;
+    }
+
+    call();
 }
+
 </script>
 
 </body>
