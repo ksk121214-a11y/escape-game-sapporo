@@ -156,57 +156,46 @@ button:hover {
 ========================= */
 @media screen and (max-width: 768px) {
 
-    html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-    }
-
     body {
-        display: block;        /* ←重要：中央寄せやめる */
-        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start; /* ←ここ重要（中央じゃなく上から自然配置） */
         min-height: 100vh;
-        overflow-x: hidden;
     }
 
-    /* 全体を画面いっぱいに */
-    #menuPanel, #elevator {
+    /* 全体の余白を強制的に作る */
+    .header {
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-size: 24px;
+    }
+
+    #warning {
+        margin: 10px 0 20px 0;
+        font-size: 14px;
+    }
+
+    .menu-btn {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+    }
+
+    /* フロアリストを“画面幅いっぱい”に固定 */
+    #menuPanel {
         width: 100%;
     }
 
-    /* タイトル固定感 */
-    .header {
-        position: sticky;
-        top: 0;
-        background: white;
-        z-index: 10;
-    }
-
-    /* 警告も固定っぽく */
-    #warning {
-        position: sticky;
-        top: 60px;
-        background: white;
-        z-index: 9;
-    }
-
-    /* フロアリストを画面フル使用 */
     .floor {
         width: 100%;
         box-sizing: border-box;
-        padding: 14px 12px;
     }
 
-    /* エレベーターも全幅 */
+    /* エレベーターを自然配置 */
     .elevator {
         width: 100%;
-        text-align: center;
         margin-top: 30px;
-    }
-
-    /* 10Fをスマホ最適化 */
-    .big-floor {
-        font-size: 70px;
     }
 }
 </style>
@@ -217,7 +206,7 @@ button:hover {
 <div class="header">TOKYU SYSTEM</div>
 
 <!-- ⚠ -->
-<div id="warning">⚠ 移動経路は封鎖されています</div>
+<div id="warning">⚠ 移動経路は封鎖されていますyo</div>
 
 <!-- メニュー -->
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
