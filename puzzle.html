@@ -92,6 +92,45 @@ footer {
     background: #111;
     margin-top: 50px;
 }
+
+/* ピアノ */
+.piano {
+    display: flex;
+    justify-content: center;
+}
+
+/* 白鍵の枠 */
+.key {
+    position: relative;
+}
+
+/* 白鍵 */
+.white {
+    width: 40px;
+    height: 120px;
+    background: white;
+    border: 1px solid #333;
+}
+
+/* 黒鍵（中央に配置） */
+.black {
+    width: 25px;
+    height: 80px;
+    background: black;
+    position: absolute;
+    top: 0;
+    right: -12px; /* ←これが神ポイント */
+    z-index: 2;
+}
+
+#nextBtn {
+    margin-top: 20px;
+    padding: 12px 24px;
+    background: #222;
+    color: #ffcc66;
+    border: 1px solid #ffcc66;
+}
+
 </style>
 </head>
 
@@ -99,8 +138,8 @@ footer {
 
 <!-- ナビ -->
 <nav class="mobile-menu" id="mobileMenu">
-    <a href="index.html">トップニュース</a>
-    <a href="mailbox.html">博士からのメール</a>
+    <a href="index.html">TOP NEWS</a>
+    <a href="mailbox.html">MAIL BOX</a>
     <a href="puzzle.html">謎解きページ</a>
     <a href="hint.html">速報</a>
 </nav>
@@ -117,14 +156,66 @@ footer {
             時を刻み 人々を見守る
         </p>
 
-        <input type="text" id="answer" placeholder="答えを入力">
+        <div id="pianoArea" style="display:none; margin-top:20px;">
+                <button onclick="playMelody()">▶ 再生</button>
+
+                <div class="piano">
+
+                    <!-- ド（黒鍵あり） -->
+                    <div class="key">
+                        <div class="white" onclick="playNote('do')"></div>
+                        <div class="black" onclick="playNote('do')"></div>
+                    </div>
+
+                    <!-- レ（黒鍵あり） -->
+                    <div class="key">
+                        <div class="white" onclick="playNote('re')"></div>
+                        <div class="black" onclick="playNote('re')"></div>
+                    </div>
+
+                    <!-- ミ（黒鍵なし） -->
+                    <div class="key">
+                        <div class="white" onclick="playNote('mi')"></div>
+                    </div>
+
+                    <!-- ファ（黒鍵あり） -->
+                    <div class="key">
+                        <div class="white" onclick="playNote('fa')"></div>
+                        <div class="black" onclick="playNote('fa')"></div>
+                    </div>
+
+                    <!-- ソ（黒鍵あり） -->
+                    <div class="key">
+                        <div class="white" onclick="playNote('so')"></div>
+                        <div class="black" onclick="playNote('so')"></div>
+                    </div>
+
+                    <!-- ラ（黒鍵あり） -->
+                    <div class="key">
+                        <div class="white" onclick="playNote('la')"></div>
+                        <div class="black" onclick="playNote('la')"></div>
+                    </div>
+
+                    <!-- シ（黒鍵なし） -->
+                    <div class="key">
+                        <div class="white" onclick="playNote('si')"></div>
+                    </div>
+
+                </div>
+        </div>
+
+        <input type="text" id="answer" placeholder="推理結果を入力…">
         <br>
-        <button onclick="checkAnswer()">解読</button>
+        <button onclick="checkAnswer()">確認</button>
 
         <p id="message"></p>
     </div>
 
     <p id="final"></p>
+
+    <button id="nextBtn" style="display:none;" onclick="goNextFile()">
+        File2を捜査する →
+    </button>
 
 </div>
 
@@ -132,7 +223,7 @@ footer {
     <p>© 2026 世界ニュース速報</p>
 </footer>
 
-<script src="puzzle.js"></script>
+<script src="js/puzzle.js"></script>
 
 </body>
 </html>
