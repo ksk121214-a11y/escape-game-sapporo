@@ -1,82 +1,39 @@
-document.addEventListener("DOMContentLoaded", () => {
-    // =========================
-    // ハンバーガーメニュー
-    // =========================
-    const menuBtn = document.getElementById("menuBtn");
-    const mobileMenu = document.getElementById("mobileMenu");
+let stage = 1;
 
-    if(menuBtn && mobileMenu) {
-        menuBtn.addEventListener("click", () => {
-            mobileMenu.style.display = mobileMenu.style.display === "flex" ? "none" : "flex";
-        });
+function checkAnswer() {
+    const ans = document.getElementById("answer").value;
+
+    if(stage === 1 && ans.includes("時計台")) {
+        nextFile(2, "北に流れる大いなる川\nその名を答えよ");
     }
-
-    // =========================
-    // パズル処理
-    // =========================
-    const submitBtn = document.getElementById("submitPuzzle");
-    const input = document.getElementById("puzzleCode");
-    const result = document.getElementById("puzzleResult");
-
-    if(submitBtn && input && result) {
-        const correctCode = "246810"; // 正解の6桁数字
-        submitBtn.addEventListener("click", () => {
-            const code = input.value.trim();
-            if(code === correctCode) {
-                result.style.color = "#28a745";
-                result.innerHTML = `
-                    <p>正解！ウイルスの場所: 中央区ビルA地下室</p>
-                    <p>犯人: Dr. X</p>
-                `;
-            } else {
-                result.style.color = "#d9534f";
-                result.textContent = "数字が違います。もう一度確認してください。";
-            }
-        });
+    else if(stage === 2 && ans.includes("豊平川")) {
+        nextFile(3, "赤いレンガの建物\nかつての役目は何だ");
     }
-   // =========================
-    // piano
-    // =========================
-
-    /*const AudioContext = window.AudioContext || window.webkitAudioContext;
-    const audioCtx = new AudioContext();
-
-    function playSound(freq){
-
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-
-        osc.frequency.value = freq;
-        osc.type = "sine";
-
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-
-        osc.start();
-
-        gain.gain.setValueAtTime(1, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1);
-
-        osc.stop(audioCtx.currentTime + 1);
+    else if(stage === 3 && ans.includes("道庁")) {
+        nextFile(4, "地下に広がる巨大な通路\nその名は？");
     }
+    else if(stage === 4 && ans.includes("地下歩行空間")) {
+        finishGame();
+    }
+    else {
+        document.getElementById("message").textContent = "…違うようだ";
+    }
+}
 
-    const notes = {
-        C: 261,
-        D: 294,
-        E: 329,
-        F: 349,
-        G: 392,
-        A: 440,
-        B: 493,
-        C2: 523
-    };
+function nextFile(num, questionText) {
+    stage = num;
 
-    document.querySelectorAll(".key").forEach(key => {
-        key.addEventListener("click", () => {
+    document.getElementById("fileTitle").textContent = "File " + num;
+    document.getElementById("question").innerHTML = questionText.replace(/\n/g, "<br>");
+    document.getElementById("answer").value = "";
+    document.getElementById("message").textContent = "解析成功…次のファイルを開く";
+}
 
-            const note = key.dataset.note;
-            playSound(notes[note]);
+function finishGame() {
+    document.getElementById("fileBox").style.display = "none";
 
-        });
-    });*/
-});
+    document.getElementById("final").innerHTML =
+        "最終暗号：<br><br>" +
+        "『カギは最初に戻る』<br>" +
+        "—— 探偵より";
+}

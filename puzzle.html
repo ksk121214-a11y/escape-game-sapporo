@@ -2,18 +2,101 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>街の謎解き</title>
-<link rel="stylesheet" href="css/style.css">
-<script defer src="js/puzzle.js"></script>
+<title>謎解きファイル</title>
+
+<style>
+body {
+    margin: 0;
+    background: #1a1a1a;
+    color: #e8e0c9;
+    font-family: "Courier New", monospace;
+}
+
+/* ナビ */
+.mobile-menu {
+    background: #111;
+    padding: 15px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.mobile-menu a {
+    color: #e8e0c9;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* メイン */
+.container {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+/* ファイル */
+.file {
+    border: 2px solid #c2b280;
+    background: #2b2b2b;
+    padding: 30px;
+    max-width: 500px;
+    margin: auto;
+    box-shadow: 0 0 20px rgba(0,0,0,0.7);
+}
+
+h1 {
+    letter-spacing: 2px;
+}
+
+/* 入力 */
+input {
+    padding: 10px;
+    width: 70%;
+    font-size: 16px;
+    margin-top: 20px;
+    background: #111;
+    color: #e8e0c9;
+    border: 1px solid #c2b280;
+}
+
+/* ボタン */
+button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    background: #444;
+    color: #e8e0c9;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #666;
+}
+
+/* メッセージ */
+#message {
+    margin-top: 15px;
+    height: 20px;
+}
+
+/* 最終 */
+#final {
+    margin-top: 30px;
+    font-size: 20px;
+    color: #ffcc66;
+}
+
+/* フッター */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #111;
+    margin-top: 50px;
+}
+</style>
 </head>
-<body id="puzzlePage">
 
-<header>
-    <h1>街の謎解き</h1>
-    <button class="menu-btn" id="menuBtn">☰</button>
-</header>
+<body>
 
+<!-- ナビ -->
 <nav class="mobile-menu" id="mobileMenu">
     <a href="index.html">トップニュース</a>
     <a href="mailbox.html">博士からのメール</a>
@@ -21,37 +104,34 @@
     <a href="hint.html">速報</a>
 </nav>
 
-<main>
-    <section class="puzzle-section">
-        <h2>暗号入力</h2>
-        <p>6桁の数字を入力してください。</p>
+<div class="container">
 
-        <div class="puzzle-input">
-            <input type="text" id="puzzleCode" placeholder="例: 123456" maxlength="6">
-            <button id="submitPuzzle">送信</button>
-        </div>
+    <h1>DETECTIVE FILE</h1>
 
-        <div id="puzzleResult" class="puzzle-result"></div>
-    </section>
+    <div class="file" id="fileBox">
+        <h2 id="fileTitle">File 1</h2>
 
-    <div class="piano">
+        <p id="question">
+            この街の中心に立つ塔<br>
+            時を刻み 人々を見守る
+        </p>
 
-    <div class="key" data-note="C">ド</div>
-    <div class="key" data-note="D">レ</div>
-    <div class="key" data-note="E">ミ</div>
-    <div class="key" data-note="F">ファ</div>
-    <div class="key" data-note="G">ソ</div>
-    <div class="key" data-note="A">ラ</div>
-    <div class="key" data-note="B">シ</div>
-    <div class="key" data-note="C2">ド</div>
+        <input type="text" id="answer" placeholder="答えを入力">
+        <br>
+        <button onclick="checkAnswer()">解読</button>
+
+        <p id="message"></p>
+    </div>
+
+    <p id="final"></p>
 
 </div>
-
-</main>
 
 <footer>
     <p>© 2026 世界ニュース速報</p>
 </footer>
+
+<script src="puzzle.js"></script>
 
 </body>
 </html>
