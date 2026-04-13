@@ -18,6 +18,11 @@ body {
     font-family: 'Orbitron', monospace;
 }
 
+.container {
+    max-width: 600px;   /* ←ここがキモ */
+    margin: 0 auto;     /* ←中央寄せ */
+    padding: 10px;
+}
 
 /* ヘッダー */
 .header {
@@ -52,13 +57,12 @@ body {
 
 /* 階 */
 .floor {
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 18px;
-    font-size: 24px;
-    border-bottom: 1px solid #aaa;
-    cursor: pointer;
-    color: red;
+    padding: 16px;
+    border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
 }
 
 /* 解除 */
@@ -165,24 +169,26 @@ button:hover {
 
 <body>
 
-<div class="header">TOKYU SYSTEM</div>
+    <div class="container">
+        <div class="header">TOKYU SYSTEM</div>
 
-<!-- ⚠ -->
-<div id="warning">⚠ 移動経路は封鎖されていますyo</div>
+        <!-- ⚠ -->
+        <div id="warning">⚠ 移動経路は封鎖されています</div>
 
-<!-- メニュー -->
-<div class="menu-btn" onclick="toggleMenu()">☰</div>
-<div id="menuPanel"></div>
+        <!-- メニュー -->
+        <div class="menu-btn" onclick="toggleMenu()">☰</div>
+        <div id="menuPanel"></div>
 
-<!-- エレベーター -->
-<div id="elevator" class="elevator">
-    <div id="floorText" class="big-floor locked">10F</div>
-    <div id="statusText" class="status">封鎖中</div>
+        <!-- エレベーター -->
+        <div id="elevator" class="elevator">
+            <div id="floorText" class="big-floor locked">10F</div>
+            <div id="statusText" class="status">封鎖中</div>
 
-    <input id="passwordInput" placeholder="password🗝️">
-    <br>
-    <button onclick="checkPassword()">確定</button>
-</div>
+            <input id="passwordInput" placeholder="password🗝️">
+            <br>
+            <button onclick="checkPassword()">確定</button>
+        </div>
+    </div>
 
 <script>
 
