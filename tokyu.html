@@ -151,65 +151,57 @@ button:hover {
     100% { background: white; }
 }
 
+
 /* =========================
-   📱 スマホ最適化
+   📱 スマホ完全中央化修正
 ========================= */
 @media screen and (max-width: 768px) {
 
+    html, body {
+        height: 100%;
+    }
+
     body {
-        font-size: 14px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;  /* ←縦中央 */
+        align-items: center;      /* ←横中央 */
+        min-height: 100vh;
+        text-align: center;
     }
 
-    /* タイトル */
+    /* 画面幅を使い切るのを防ぐ */
     .header {
-        font-size: 24px;
-        padding: 12px;
+        font-size: 22px;
+        padding: 10px;
     }
 
-    /* ⚠警告 */
     #warning {
         font-size: 14px;
-        margin-top: 0;
-        padding: 5px;
+        margin: 5px 0;
     }
 
-    /* ☰メニュー */
-    .menu-btn {
-        top: 15px;
-        left: 15px;
-        font-size: 34px;
-    }
-
-    /* メニュー中 */
-    .floor {
-        font-size: 18px;
-        padding: 14px;
-    }
-
-    /* エレベーター */
+    /* エレベーター全体 */
     .elevator {
-        margin-top: 30px;
+        margin-top: 0;
+        width: 100%;
     }
 
-    /* 10F表示（超重要） */
+    /* 10F表示を見やすく */
     .big-floor {
-        font-size: 70px;
-        padding: 20px;
+        font-size: 60px;
+        padding: 15px;
     }
 
-    /* 入力欄 */
-    input {
-        width: 180px;
+    /* 入力・ボタンを縦にまとめる */
+    input, button {
+        display: block;
+        margin: 10px auto;
     }
 
-    /* ボタン */
-    button {
-        width: 100px;
-    }
-
-    /* メニュー全体 */
+    /* 横に広がるの防止 */
     #menuPanel {
-        padding: 10px;
+        width: 100%;
     }
 }
 </style>
@@ -220,7 +212,7 @@ button:hover {
 <div class="header">TOKYU SYSTEM</div>
 
 <!-- ⚠ -->
-<div id="warning">⚠ 移動経路は封鎖されていますyo</div>
+<div id="warning">⚠ 移動経路は封鎖されています</div>
 
 <!-- メニュー -->
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
