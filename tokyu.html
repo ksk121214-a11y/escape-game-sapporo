@@ -8,9 +8,9 @@
 
 <style>
 html, body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden; /* ←これが最重要 */
+    max-height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -18,13 +18,9 @@ body {
 }
 
 .container {
-    width: 100vw;
-    height: 100vh;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    min-height: 100vh;
+    display: block; /* ←flexやめるのが一番安定 */
+    padding: 10px;
 }
 
 /* ヘッダー */
@@ -158,29 +154,35 @@ button:hover {
     animation: flashAnim 0.4s ease;
 }
 
-.elevator {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    width: 100%;
-    height: 100%;
-}
-
 @keyframes flashAnim {
     0% { background: white; }
     50% { background: #d6ffd6; }
     100% { background: white; }
 }
 
-
-
 /* =========================
    📱 スマホ最適化
 ========================= */
+.elevator {
+    display: none;
+}
 
+/* ★ スマホ用 */
+@media screen and (max-width: 768px) {
 
+    .elevator {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;  /* ←縦中央 */
+        align-items: center;      /* ←横中央 */
+
+        min-height: 100vh;
+
+        max-height: 100%;
+        margin: 0;
+        padding: 0;           /* ←余白消す */
+    }
+}
 
 </style>
 </head>
@@ -191,7 +193,7 @@ button:hover {
         <div class="header">TOKYU SYSTEM</div>
 
         <!-- ⚠ -->
-        <div id="warning">⚠ 移動経路は封鎖されていますg</div>
+        <div id="warning">⚠ 移動経路は封鎖されています</div>
 
         <!-- メニュー -->
         <div class="menu-btn" onclick="toggleMenu()">☰</div>
