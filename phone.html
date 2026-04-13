@@ -110,6 +110,7 @@ body {
     <div class="display-area">
         <div id="display"></div>
     </div>
+    
 
     <!-- キーパッド -->
     <div class="keypad">
@@ -223,37 +224,59 @@ function playCode() {
 // 発信
 function call() {
 
-    // 🔥すでに通話中なら終了
-    if (isCalling) return;
-
-    if (number !== "0120763954") return;
-
     isCalling = true;
 
     setDisplay("発信中...");
 
     setTimeout(() => {
-        play("call.mp3");
 
-        setTimeout(() => {
-            setDisplay("通話中");
+        if (number === "0120763954") {
 
-            speak("暗号機密センターです。暗号を知りたい方は1を、一発ギャグを聞きたい方は2を、押してください。");
+            play("call.mp3");
 
-            stage = 2;
-            number = "";
-        }, 2500);
+            setTimeout(() => {
+                setDisplay("通話中");
+
+                speak("暗号機密センターです。暗号を知りたい方は1を、一発ギャグを聞きたい方は2を、押してください。");
+
+                stage = 2;
+                number = "";
+
+            }, 2500);
+            
+
+        } else {
+
+            // ❌失敗ルート
+            play("busy.mp3");
+
+            setTimeout(() => {
+                setDisplay("繋がりませんでした");
+
+                setTimeout(() => {
+                    // 🔥メインへ戻す（CDACHGEJBF画面）
+                    location.href = "escape-system.html?call=fail";
+                }, 1500);
+
+            }, 1200);
+        }
 
     }, 800);
 }
 
-function toggleCall() {
 
-    // 🔥通話中なら終了
+function toggleCall() {
     if (isCalling) {
-        speechSynthesis.cancel(); // 音声停止
-        location.href = "escape-system.html";
-        return;
+        // 通話終了
+        speechSynthesis.cancel();
+        isCalling = false;
+        setDisplay("通話終了");
+
+        // 元の画面へ戻る（電話アイコンの場所）
+        const returnPage = localStorage.getItem("return_page");
+
+        location.href = returnPage || "escape-system.html?call=fail";
+        return; // ★これ絶対必要
     }
 
     call();

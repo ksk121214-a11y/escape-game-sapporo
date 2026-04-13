@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>TOKYU SYSTEM</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    background: white;
+    font-family: 'Orbitron', monospace;
+    color: black;
+}
+
+/* ヘッダー */
+.header {
+    text-align: center;
+    font-size: 34px;
+    padding: 20px;
+}
+
+/* ⚠メッセージ */
+#warning {
+    text-align: center;
+    color: red;
+    font-weight: bold;
+    margin-top: -5px;
+    transition: 0.3s;
+}
+
+/* ☰（10Fの上・大きめ） */
+.menu-btn {
+    position: absolute;
+    top: 60px;   /* ←ここを小さくすると上に行く */
+    left: 30px;
+    font-size: 42px;
+    cursor: pointer;
+}
+
+/* メニュー */
+#menuPanel {
+    display: none;
+    padding: 15px;
+}
+
+/* 階 */
+.floor {
+    display: flex;
+    justify-content: space-between;
+    padding: 18px;
+    font-size: 24px;
+    border-bottom: 1px solid #aaa;
+    cursor: pointer;
+    color: red;
+}
+
+/* 解除 */
+.floor.unlocked {
+    color: green;
+}
+
+/* ロック */
+.lock {
+    margin-left: 10px;
+}
+
+/* エレベーター */
+.elevator {
+    display: none;
+    text-align: center;
+    margin-top: 60px;
+}
+
+/* 大きい階 */
+.big-floor {
+    font-size: 120px;
+    border: 3px solid black;
+    display: inline-block;
+    padding: 30px;
+    position: relative;
+}
+
+/* ×封鎖 */
+.big-floor.locked::before,
+.big-floor.locked::after {
+    content: "";
+    position: absolute;
+    width: 160%;
+    height: 3px;
+    background: red;
+    top: 50%;
+    left: -30%;
+}
+
+.big-floor.locked::before {
+    transform: rotate(45deg);
+}
+
+.big-floor.locked::after {
+    transform: rotate(-45deg);
+}
+
+.status {
+    margin: 20px;
+    font-size: 20px;
+    color: red;
+}
+
+.status.success {
+    color: green;
+}
+
+input {
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid black;
+    text-align: center;
+}
+
+button {
+    margin-top: 10px;
+    padding: 12px;
+    width: 200px;
+    background: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/* ===== 解除演出 ===== */
+.flash {
+    animation: flashAnim 0.4s ease;
+}
+
+@keyframes flashAnim {
+    0% { background: white; }
+    50% { background: #d6ffd6; }
+    100% { background: white; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">TOKYU SYSTEM</div>
+
+<!-- ⚠ -->
+<div id="warning">⚠ 移動経路は封鎖されています</div>
+
+<!-- メニュー -->
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
+<div id="menuPanel"></div>
+
+<!-- エレベーター -->
+<div id="elevator" class="elevator">
+    <div id="floorText" class="big-floor locked">10F</div>
+    <div id="statusText" class="status">封鎖中</div>
+
+    <input id="passwordInput" placeholder="password🗝️">
+    <br>
+    <button onclick="checkPassword()">確定</button>
+</div>
+
+<script>
+
+    
+
+const floors = [
+    { id: 10, locked: true, pass: "1010" },
+    { id: 9, locked: true, pass: "0909" },
+    { id: 8, locked: true, pass: "0808" },
+    { id: 7, locked: true, pass: "0707" },
+    { id: 6, locked: true, pass: "0606" },
+    { id: 5, locked: true, pass: "0505" },
+    { id: 4, locked: true, pass: "0404" },
+    { id: 3, locked: true, pass: "0303" },
+    { id: 2, locked: true, pass: "0202" },
+    { id: 1, locked: true, pass: "0101" },
+];
+
+loadState();
+
+let current = null;
+
+/* メニュー */
+function toggleMenu() {
+    const m = document.getElementById("menuPanel");
+
+    if (m.style.display === "block") {
+        m.style.display = "none";
+        m.innerHTML = "";
+        return;
+    }
+
+    document.getElementById("elevator").style.display = "none";
+    document.getElementById("passwordInput").value = "";
+
+    m.style.display = "block";
+    renderMenu();
+}
+
+/* メニュー描画 */
+function renderMenu() {
+
+    const m = document.getElementById("menuPanel");
+    m.innerHTML = "";
+
+    const backBtn = document.createElement("div");
+    backBtn.textContent = "← ANALYSIS SYSTEMへ戻る";
+    backBtn.style.padding = "18px";
+    backBtn.style.fontSize = "20px";
+    backBtn.style.cursor = "pointer";
+    backBtn.style.borderBottom = "2px solid #aaa";
+    backBtn.style.color = "black";
+
+    backBtn.onclick = () => {
+        location.href = "escape-system.html";
+    };
+
+    m.appendChild(backBtn);
+
+    floors.forEach(f => {
+        const div = document.createElement("div");
+
+        div.className = "floor " + (f.locked ? "" : "unlocked");
+
+        div.innerHTML = `${f.id}F <span class="lock">${f.locked ? "🔒" : "🟢"}</span>`;
+        div.onclick = () => openFloor(f.id);
+
+        m.appendChild(div);
+    });
+}
+
+/* 階 */
+function openFloor(id) {
+    current = floors.find(f => f.id === id);
+
+    document.getElementById("menuPanel").style.display = "none";
+    document.getElementById("menuPanel").innerHTML = "";
+
+    const box = document.getElementById("floorText");
+    const status = document.getElementById("statusText");
+
+    document.getElementById("elevator").style.display = "block";
+
+    box.textContent = id + "F";
+    updateUI();
+}
+
+/* UI */
+function updateUI() {
+    const box = document.getElementById("floorText");
+    const status = document.getElementById("statusText");
+
+    if (!current.locked) {
+        box.classList.remove("locked");
+        status.textContent = "封鎖解除";
+        status.style.color = "green";
+    } else {
+        box.classList.add("locked");
+        status.textContent = "封鎖中";
+        status.style.color = "red";
+    }
+}
+
+/* ★全解除 */
+function unlockAll() {
+    floors.forEach(f => f.locked = false);
+
+    saveState();
+
+    const w = document.getElementById("warning");
+    w.textContent = "全階の封鎖が解除されました";
+    w.style.color = "green";
+
+    flashScreen();
+}
+
+/* パスワード */
+function checkPassword() {
+    const val = document.getElementById("passwordInput").value;
+
+    if (!current) return;
+
+    if (val === current.pass) {
+
+        current.locked = false;
+        saveState();
+        document.getElementById("passwordInput").value = "";
+
+        if (current.id === 6) {
+            unlockAll();
+        }
+
+        updateUI();
+        renderMenu();
+
+    } else {
+        alert("ERROR");
+    }
+}
+
+function flashScreen() {
+    document.body.classList.add("flash");
+
+    setTimeout(() => {
+        document.body.classList.remove("flash");
+    }, 400);
+}
+
+function saveState() {
+    localStorage.setItem("tokyu_floors", JSON.stringify(floors));
+}
+
+function loadState() {
+    const data = localStorage.getItem("tokyu_floors");
+    if (!data) return;
+
+    const saved = JSON.parse(data);
+
+    saved.forEach((s, i) => {
+        floors[i].locked = s.locked;
+    });
+}
+
+</script>
+
+</body>
+</html>
