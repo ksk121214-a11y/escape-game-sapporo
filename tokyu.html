@@ -22,7 +22,10 @@ body {
 .container {
     min-height: 100vh;
     display: block; /* ←flexやめるのが一番安定 */
-    padding: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 /* ヘッダー */
@@ -83,11 +86,14 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    text-align: center;
+    padding: 20px; /* ←これだけで上下左右に余白できる */
+    box-sizing: border-box;
 }
 
 /* 大きい階 */
 .big-floor {
-    font-size: 180px;
+    font-size: 80px;
     border: 3px solid black;
     display: inline-block;
     padding: 40px;
@@ -116,7 +122,7 @@ body {
 
 .status {
     margin: 20px;
-    font-size: 30px;
+    font-size: 20px;
     color: red;
 }
 
@@ -128,7 +134,7 @@ input {
     width: 220px;      /* ←狭くした */
     max-width: 300px;
     padding: 14px;
-    font-size: 20px;
+    font-size: 16px;
     border: 2px solid black;
     text-align: center;
     display: block;
