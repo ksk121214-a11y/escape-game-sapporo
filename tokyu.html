@@ -113,20 +113,27 @@ body {
 }
 
 input {
-    padding: 12px;
+    width: 220px;      /* ←狭くした */
+    max-width: 80%;
+    padding: 10px;
     font-size: 16px;
     border: 2px solid black;
     text-align: center;
+    display: block;
+    margin: 0 auto;
 }
 
 button {
     margin-top: 10px;
-    padding: 12px;
-    width: 200px;
+    padding: 10px;
+    width: 120px;      /* ←狭くした */
     background: black;
     color: white;
     border: none;
     cursor: pointer;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 button:hover {
@@ -192,16 +199,12 @@ button:hover {
 
     /* 入力欄 */
     input {
-        width: 80%;
-        font-size: 16px;
-        padding: 10px;
+        width: 180px;
     }
 
     /* ボタン */
     button {
-        width: 80%;
-        font-size: 16px;
-        padding: 10px;
+        width: 100px;
     }
 
     /* メニュー全体 */
