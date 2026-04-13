@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>VIRUS CONTROL</title>
+
+<style>
+body {
+    margin: 0;
+    background: radial-gradient(circle, #1a0000, #000);
+    color: #ff3b3b;
+    font-family: "Arial Black", sans-serif;
+    text-align: center;
+}
+
+/* タイトル */
+h1 {
+    margin-top: 30px;
+    font-size: 28px;
+    letter-spacing: 3px;
+}
+
+/* タイマー */
+#timer {
+    font-size: 50px;
+    margin: 20px;
+    color: #ff0000;
+    text-shadow: 0 0 10px red;
+}
+
+/* ボタン（アニメ風） */
+#launchBtn {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: linear-gradient(#ff4d4d, #990000);
+    border: 4px solid #330000;
+    box-shadow: 0 8px 0 #550000, 0 0 20px red;
+    cursor: pointer;
+    transition: all 0.1s ease;
+}
+
+/* 押し込み */
+#launchBtn:active {
+    transform: translateY(6px);
+    box-shadow: 0 2px 0 #550000, 0 0 10px red;
+}
+
+/* 入力 */
+input {
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 18px;
+    background: #111;
+    color: #fff;
+    border: 1px solid red;
+}
+
+/* 結果 */
+#result {
+    margin-top: 30px;
+    font-size: 20px;
+    color: #00ffcc;
+}
+
+/* 警告テキスト */
+.warning {
+    color: yellow;
+    font-size: 14px;
+    margin-top: 10px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0% {opacity: 1;}
+    50% {opacity: 0.3;}
+    100% {opacity: 1;}
+}
+
+#virusIcon {
+    font-size: 60px;
+    text-align: center;
+    margin-top: 10px;
+    color: red;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1> VIRUS RELEASE SYSTEM </h1>
+
+<div id="virusIcon">☣</div>
+
+<div id="timer">30:00</div>
+
+<button id="launchBtn"></button>
+
+<div class="warning">⚠ カウントダウン進行中 ⚠</div>
+
+<br>
+
+<input id="finalAnswer" placeholder="認証コードを入力">
+
+<div id="result"></div>
+
+<script>
+let time = 1800;
+let timerActive = true;
+
+function updateTimer() {
+    if(!timerActive) return;
+
+    const min = Math.floor(time / 60);
+    const sec = time % 60;
+
+    document.getElementById("timer").textContent =
+        `${min}:${sec.toString().padStart(2, "0")}`;
+
+    time--;
+
+    if(time >= 0) {
+        setTimeout(updateTimer, 1000);
+    } else {
+        document.getElementById("result").textContent =
+            "ウイルス放出完了…";
+    }
+}
+
+updateTimer();
+
+/* ボタン押した時 */
+document.getElementById("launchBtn").addEventListener("click", () => {
+    const ans = document.getElementById("finalAnswer").value;
+
+    if(ans.includes("答え")) { // ←最終コードに変更
+
+        timerActive = false;
+
+        // 背景白
+        document.body.style.background = "white";
+        document.body.style.color = "#00aa00";
+
+        // タイマー（STOP）を緑に
+        const timer = document.getElementById("timer");
+        timer.textContent = "STOP";
+        timer.style.color = "#00aa00";
+        timer.style.textShadow = "none";
+
+        // ボタン緑化
+        const btn = document.getElementById("launchBtn");
+        btn.style.background = "#00aa00";
+        btn.style.boxShadow = "0 8px 0 #006600, 0 0 20px #00aa00";
+        btn.style.border = "4px solid #006600";
+
+        // 入力欄も緑に
+        const input = document.getElementById("finalAnswer");
+        input.style.border = "2px solid #00aa00";
+        input.style.color = "#00aa00";
+        input.style.background = "#f0fff0";
+
+        // ウイルスアイコンも緑に
+        const icon = document.getElementById("virusIcon");
+        icon.style.color = "#00aa00";
+
+        // カウントダウン警告消す
+        const warning = document.querySelector(".warning");
+        if(warning) warning.style.display = "none";
+
+        // 結果
+        document.getElementById("result").innerHTML =
+            "✔ ウイルスの放出を停止しました<br><br>" +
+            "📍 ウイルスの場所：札幌市〇〇区〇〇";
+
+        document.getElementById("result").style.color = "#00aa00";
+
+    } else {
+        document.getElementById("result").textContent = "認証エラー";
+    }
+});
+</script>
+
+</body>
+</html>

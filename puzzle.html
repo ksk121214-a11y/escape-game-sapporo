@@ -87,10 +87,16 @@ button:hover {
 
 /* フッター */
 footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
     text-align: center;
     padding: 20px;
     background: #111;
-    margin-top: 50px;
+
+    z-index: 999;
 }
 
 /* ピアノ */
@@ -131,10 +137,45 @@ footer {
     border: 1px solid #ffcc66;
 }
 
+
+.cell {
+    width: 20px;
+    height: 20px;
+    background: #eee;
+}
+
+.cell.black {
+    background: black;
+}
+
+#notification {
+    position: fixed;
+    top: -80px;
+    left: 0;
+    width: 100%;
+
+    background: white;   /* ←黒→白に変更 */
+    color: black;        /* ←文字も見えるように黒 */
+
+    padding: 15px;
+    text-align: center;
+    border-bottom: 2px solid #ff5555;
+    font-size: 16px;
+    z-index: 9999;
+
+    transition: top 0.5s ease;
+
+    cursor: pointer; /* ←追加 */
+}
+
 </style>
 </head>
 
 <body>
+
+    <div id="notification" onclick="goMail()">
+        📩 新着メール：Dr. Keller
+    </div>
 
 <!-- ナビ -->
 <nav class="mobile-menu" id="mobileMenu">
@@ -203,7 +244,39 @@ footer {
 
                 </div>
         </div>
+         <!-- ファイル２ -->
+        <div id="imageArea" style="display:none; margin-top:20px;">
+            <img src="img/Component 1.png" style="width:45%; margin:5px;">
+            <img src="img/Component 1.png" style="width:45%; margin:5px;">
 
+            <div style="margin-top:10px;">
+                <input type="text" id="imgAnswer1" placeholder="画像①の答え">
+                <input type="text" id="imgAnswer2" placeholder="画像②の答え">
+            </div>
+        </div>
+
+        <div id="abcArea" style="display:none; margin-top:20px;">
+            <input type="text" id="inputA" placeholder="A">
+            <input type="text" id="inputB" placeholder="B">
+            <input type="text" id="inputC" placeholder="C">
+        </div>
+
+        <!-- ファイル3 -->
+        <!-- ファイル3（画像3枚） -->
+        <div id="image3Area" style="display:none; margin-top:20px;">
+
+            <img src="img/Component 1.png" style="width:45%; margin:5px;">
+            <img src="img/Component 1.png" style="width:45%; margin:5px;">
+            <img src="img/Component 1.png" style="width:45%; margin:5px;">
+
+            <div style="margin-top:10px;">
+                <input type="text" id="img3A" placeholder="A">
+                <input type="text" id="img3B" placeholder="B">
+                <input type="text" id="img3C" placeholder="C">
+            </div>
+        </div>
+
+         <!-- 入力後text -->
         <input type="text" id="answer" placeholder="推理結果を入力…">
         <br>
         <button onclick="checkAnswer()">確認</button>
@@ -213,8 +286,16 @@ footer {
 
     <p id="final"></p>
 
-    <button id="nextBtn" style="display:none;" onclick="goNextFile()">
+    <button id="nextBtn" style="display:none;" onclick="goToFile(2, 'nextBtn')">
         File2を捜査する →
+    </button>
+
+    <button id="nextBtn3" style="display:none;" onclick="goToFile(3, 'nextBtn3')">
+        File3を捜査する →
+    </button>
+    
+    <button id="mailBtn" style="display:none;" onclick="location.href='mail.html'">
+        博士のメールを確認 →
     </button>
 
 </div>
