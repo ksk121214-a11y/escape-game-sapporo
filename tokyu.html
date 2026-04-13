@@ -7,15 +7,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-html, body {
-    height: 100%;
-    min-height: 100vh;
-    max-width: 500px;
-}
 
 body {
     margin: 0;
-    min-height: 100vh;
     font-family: 'Orbitron', monospace;
 }
 
@@ -162,20 +156,13 @@ button:hover {
 ========================= */
 @media screen and (max-width: 768px) {
 
-    body {
-        display: block;   /* ← flexやめる */
+    body { /* ← flexやめる */
         margin: 0;
-        max-width: 500px;
     }
 
     /* 全体の余白を強制的に作る */
-    .header,
-    #warning,
-    #menuPanel,
-    .elevator {
-        width: 100%;
-        box-sizing: border-box;
-    }
+
+    
 
     .floor {
         width: 100%;
