@@ -13,15 +13,19 @@ html, body {
 }
 
 body {
-    margin: 0;
     min-height: 100vh;
+    display: flex;
+    justify-content: center; /* 横中央 */
     font-family: 'Orbitron', monospace;
 }
 
 .container {
-    max-width: 600px;   /* ←ここがキモ */
-    margin: 0 auto;     /* ←中央寄せ */
-    padding: 10px;
+    width: 100%;
+    max-width: 600px;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
 }
 
 /* ヘッダー */
@@ -173,7 +177,7 @@ button:hover {
         <div class="header">TOKYU SYSTEM</div>
 
         <!-- ⚠ -->
-        <div id="warning">⚠ 移動経路は封鎖されています</div>
+        <div id="warning">⚠ 移動経路は封鎖されていますyo</div>
 
         <!-- メニュー -->
         <div class="menu-btn" onclick="toggleMenu()">☰</div>
