@@ -156,70 +156,57 @@ button:hover {
 ========================= */
 @media screen and (max-width: 768px) {
 
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
     body {
-        font-size: 14px;
+        display: block;        /* ←重要：中央寄せやめる */
+        width: 100%;
+        min-height: 100vh;
+        overflow-x: hidden;
     }
 
-    /* タイトル */
+    /* 全体を画面いっぱいに */
+    #menuPanel, #elevator {
+        width: 100%;
+    }
+
+    /* タイトル固定感 */
     .header {
-        font-size: 24px;
-        padding: 12px;
+        position: sticky;
+        top: 0;
+        background: white;
+        z-index: 10;
     }
 
-    /* ⚠警告 */
+    /* 警告も固定っぽく */
     #warning {
-        font-size: 14px;
-        margin-top: 0;
-        padding: 5px;
+        position: sticky;
+        top: 60px;
+        background: white;
+        z-index: 9;
     }
 
-    /* ☰メニュー */
-    .menu-btn {
-        top: 15px;
-        left: 15px;
-        font-size: 34px;
-    }
-
-    /* メニュー中 */
+    /* フロアリストを画面フル使用 */
     .floor {
-        padding: 10px 8px;   /* ←左右の余白を小さく */
-        font-size: 18px;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 14px 12px;
     }
 
-    .floor {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .lock {
-        margin-left: 0;      /* ←無駄なズレ防止 */
-    }
-
-    /* エレベーター */
+    /* エレベーターも全幅 */
     .elevator {
+        width: 100%;
+        text-align: center;
         margin-top: 30px;
     }
 
-    /* 10F表示（超重要） */
+    /* 10Fをスマホ最適化 */
     .big-floor {
         font-size: 70px;
-        padding: 20px;
-    }
-
-    /* 入力欄 */
-    input {
-        width: 180px;
-    }
-
-    /* ボタン */
-    button {
-        width: 100px;
-    }
-
-    /* メニュー全体 */
-    #menuPanel {
-        padding: 10px;
     }
 }
 </style>
@@ -230,7 +217,7 @@ button:hover {
 <div class="header">TOKYU SYSTEM</div>
 
 <!-- ⚠ -->
-<div id="warning">⚠ 移動経路は封鎖されていますyo</div>
+<div id="warning">⚠ 移動経路は封鎖されています</div>
 
 <!-- メニュー -->
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
