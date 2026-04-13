@@ -177,9 +177,11 @@ button:hover {
         justify-content: center;  /* ←縦中央 */
         align-items: center;      /* ←横中央 */
 
-        width: 100%;
-        height: 100vh;            /* ←画面いっぱい */
-        margin-top: 0;            /* ←余白消す */
+        min-height: 100vh;
+
+        max-height: 100%;
+        margin: 0;
+        padding: 0;           /* ←余白消す */
     }
 }
 
@@ -192,7 +194,7 @@ button:hover {
         <div class="header">TOKYU SYSTEM</div>
 
         <!-- ⚠ -->
-        <div id="warning">⚠ 移動経路は封鎖されています</div>
+        <div id="warning">⚠ 移動経路は封鎖されていますyo</div>
 
         <!-- メニュー -->
         <div class="menu-btn" onclick="toggleMenu()">☰</div>
