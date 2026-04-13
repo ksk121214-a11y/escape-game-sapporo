@@ -2,57 +2,131 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>緊急メール</title>
+<title>MAIL</title>
 
 <style>
 body {
-    background: #111;
-    color: #e8e0c9;
-    font-family: monospace;
-    padding: 30px;
+    margin: 0;
+    font-family: sans-serif;
+    background: white;
 }
 
-.mail {
-    border: 1px solid #c2b280;
+/* ===== メール全画面 ===== */
+.email-card {
+    width: 100vw;
+    height: 100vh;
+    background: #f2f2f2;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+/* ヘッダー */
+.email-header {
+    background: #e6e6e6;
     padding: 20px;
-    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-h2 {
-    color: #ff5555;
+/* 未読マーク */
+.unread-dot {
+    width: 10px;
+    height: 10px;
+    background: red;
+    border-radius: 50%;
 }
-a {
-    color: #66ccff;
+
+/* 展開で消える */
+.email-card.open .unread-dot {
+    display: none;
+}
+
+/* 本文 */
+.email-body {
+    flex: 1;
+    padding: 30px;
+    display: none;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* 展開 */
+.email-card.open .email-body {
+    display: block;
+}
+
+/* ボタン */
+.next-btn {
+    margin-top: 30px;
+    padding: 15px 25px;
+    background: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.next-btn:hover {
+    opacity: 0.8;
 }
 </style>
 </head>
 
 <body>
 
-<div class="mail">
-    <h2>🚨 緊急連絡</h2>
+<div class="email-card" id="mailCard" onclick="openMail()">
 
-    <p>
-    君がここまで辿り着いたことを確認した。<br><br>
+    <div class="email-header">
+        <span class="unread-dot"></span>
+        <strong>From:</strong> Dr. Adrian Heinrich
+        <span style="margin-left:auto;" id="mailDate"></span>
+    </div>
 
-    テロ組織によるウイルス放出が<br>
-    <b>30分以内</b>に実行される。<br><br>
+    <div class="email-body">
 
-    だが安心してくれ。<br>
-    私は奴らのシステムに侵入し、<br>
-    最後の入力画面へアクセスできるようにした。<br><br>
+        <p>Mr. Ueno</p>
 
-    最後の謎の答えを入力し、<br>
-    ウイルス放出を阻止してくれ。<br><br>
+        <p>
+            30分以内に次の課題をクリアしないと<br>
+            ウイルスが街中に放出される。
+        </p>
 
-    ▶ <a href="final.html">システムへアクセス</a>
-    </p>
+        <p>
+            私はテロ組織をハッキングした。<br>
+            最後の謎を解いてくれ。
+        </p>
 
-    <p style="margin-top:30px;">
-    — Dr. Keller
-    </p>
+        <!-- finalリンク -->
+        <button class="next-btn" onclick="goFinal(event)">
+            最終ファイルへ進む →
+        </button>
+
+    </div>
+
 </div>
+
+<script>
+
+// 日付
+window.onload = () => {
+    const now = new Date();
+    document.getElementById("mailDate").textContent =
+        `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()} ${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`;
+};
+
+// 展開
+function openMail() {
+    document.getElementById("mailCard").classList.add("open");
+}
+
+// final.htmlへ
+function goFinal(e) {
+    e.stopPropagation(); // カード展開と競合防止
+    location.href = "final.html";
+}
+
+</script>
 
 </body>
 </html>
