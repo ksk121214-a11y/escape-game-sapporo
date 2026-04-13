@@ -157,18 +157,27 @@ button:hover {
 @media screen and (max-width: 768px) {
 
     body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start; /* ←ここ重要（中央じゃなく上から自然配置） */
-        min-height: 100vh;
+        display: block;   /* ← flexやめる */
+        margin: 0;
     }
 
     /* 全体の余白を強制的に作る */
-    .header {
-        margin-top: 20px;
-        margin-bottom: 10px;
-        font-size: 24px;
+    .header,
+    #warning,
+    #menuPanel,
+    .elevator {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .floor {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    input, button {
+        width: 90%;
+        max-width: 320px;
     }
 
     #warning {
