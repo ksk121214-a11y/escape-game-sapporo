@@ -172,10 +172,13 @@ button:hover {
 
     .floor {
         width: 100%;
-        max-width: 500px;
-        margin: 0 auto;
+        max-width: none;   /* ←消す */
+        margin: 0;         /* ←消す */
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        padding: 16px;
+        box-sizing: border-box;
     }
 
     input, button {
@@ -218,7 +221,7 @@ button:hover {
 <div class="header">TOKYU SYSTEM</div>
 
 <!-- ⚠ -->
-<div id="warning">⚠ 移動経路は封鎖されていますyo</div>
+<div id="warning">⚠ 移動経路は封鎖されています</div>
 
 <!-- メニュー -->
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
