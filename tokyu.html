@@ -7,9 +7,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
+html, body {
+    height: 100%;
+    min-height: 100vh;
+}
 
 body {
     margin: 0;
+    min-height: 100vh;
     font-family: 'Orbitron', monospace;
 }
 
@@ -154,59 +159,7 @@ button:hover {
 /* =========================
    📱 スマホ最適化
 ========================= */
-@media screen and (max-width: 768px) {
 
-    body { /* ← flexやめる */
-        margin: 0;
-    }
-
-    /* 全体の余白を強制的に作る */
-
-    
-
-    .floor {
-        width: 100%;
-        max-width: none;   /* ←消す */
-        margin: 0;         /* ←消す */
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 16px;
-        box-sizing: border-box;
-    }
-
-    input, button {
-        width: 90%;
-        max-width: 320px;
-    }
-
-    #warning {
-        margin: 10px 0 20px 0;
-        font-size: 14px;
-    }
-
-    .menu-btn {
-        position: absolute;
-        top: 15px;
-        left: 15px;
-    }
-
-    /* フロアリストを“画面幅いっぱい”に固定 */
-    #menuPanel {
-        width: 100%;
-    }
-
-    .floor {
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    /* エレベーターを自然配置 */
-    .elevator {
-        width: 100%;
-        margin-top: 30px;
-    }
-}
 </style>
 </head>
 
@@ -215,7 +168,7 @@ button:hover {
 <div class="header">TOKYU SYSTEM</div>
 
 <!-- ⚠ -->
-<div id="warning">⚠ 移動経路は封鎖されています</div>
+<div id="warning">⚠ 移動経路は封鎖されていますyo</div>
 
 <!-- メニュー -->
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
