@@ -1,5 +1,6 @@
-let stage = 1; // File番号
-let step = 0;  // 問題番号
+let stage = 1;
+let step = 0;
+
 
 // 問題データ
 const data = {
@@ -43,7 +44,32 @@ const data = {
 };
 
 // 初期表示
-loadQuestion();
+window.onload = () => {
+    sessionStorage.setItem("restored", "1");
+    stage = Number(localStorage.getItem("stage")) || 1;
+
+    const savedStep = localStorage.getItem("step");
+
+    step = (savedStep === null) ? 0 : Number(savedStep);
+
+    const mode = localStorage.getItem("mode");
+
+    if (mode === "final1") return showFinal1();
+    if (mode === "final2") return showFinal2();
+    if (mode === "final3") return showFinal3();
+
+    loadQuestion();
+};
+
+function saveState() {
+    localStorage.setItem("stage", stage);
+    localStorage.setItem("step", step);
+}
+
+function loadState() {
+    stage = Number(localStorage.getItem("stage")) || 1;
+    step = Number(localStorage.getItem("step")) || 0;
+}
 
 function checkAnswer() {
     const current = data[stage][step];
@@ -60,6 +86,8 @@ function checkAnswer() {
             c.includes(current.a[2])
         ) {
             step++;
+            localStorage.setItem("stage", stage);
+            localStorage.setItem("step", step);
 
             if(step < data[stage].length) {
                 loadQuestion();
@@ -84,6 +112,7 @@ function checkAnswer() {
             a2.includes(current.a[1])
         ) {
             step++;
+            saveState();
 
             if(step < data[stage].length) {
                 loadQuestion();
@@ -109,6 +138,8 @@ function checkAnswer() {
         c.includes(current.a[2])
     ) {
         step++;
+        localStorage.setItem("stage", stage);
+        localStorage.setItem("step", step);
 
         if(step < data[stage].length) {
             loadQuestion();
@@ -128,6 +159,9 @@ function checkAnswer() {
 
     if(ans.includes(current.a)) {
         step++;
+
+        localStorage.setItem("stage", stage);
+        localStorage.setItem("step", step);
 
         if(step < data[stage].length) {
             loadQuestion();
@@ -159,8 +193,12 @@ function loadQuestion() {
 
     // 全部リセット（これが重要）
     document.getElementById("answer").value = "";
+
+    if (!sessionStorage.getItem("restored")) {
     document.getElementById("imgAnswer1").value = "";
     document.getElementById("imgAnswer2").value = "";
+}
+
     document.getElementById("inputA").value = "";
     document.getElementById("inputB").value = "";
     document.getElementById("inputC").value = "";
@@ -198,50 +236,88 @@ function loadQuestion() {
 }
 
 function nextFile() {
+    
+    localStorage.setItem("stage", stage);
+    localStorage.setItem("step", step);
 
     if(stage === 1) {
-        document.getElementById("fileBox").style.display = "none";
-
-        document.getElementById("final").innerHTML =
-            "位置情報：札幌市〇〇区〇〇<br><br>" +
-            "暗号：『次は赤き記憶を辿れ』";
-
-        document.getElementById("nextBtn").style.display = "inline-block";
+        localStorage.setItem("mode", "final1");
+        showFinal1();
         return;
     }
 
     if(stage === 2) {
-        document.getElementById("fileBox").style.display = "none";
 
-        document.getElementById("final").innerHTML =
-            "暗号：『次は影を辿れ』";
+        step = data[stage].length; // ←これ追加（重要）
 
-        document.getElementById("nextBtn3").style.display = "inline-block";
+        localStorage.setItem("stage", stage);
+        localStorage.setItem("step", step);
+        localStorage.setItem("mode", "final2");
+
+        showFinal2();
         return;
     }
 
-    // 🔥 これ追加
     if(stage === 3) {
-    document.getElementById("fileBox").style.display = "none";
 
-    document.getElementById("final").innerHTML =
-        "暗号：『最後の鍵は通信の中にある』";
+        step = data[stage].length;
 
-    showNotification(); // ←これ追加！！
+        localStorage.setItem("stage", stage);
+        localStorage.setItem("step", step);
+        localStorage.setItem("mode", "final3");
 
-    return;
-}
+        showFinal3();
+        return;
+    }
 
     stage++;
     step = 0;
 
-    if(stage <= 4) {
-        loadQuestion();
-        document.getElementById("message").textContent =
-            "File " + (stage - 1) + " 完了…次のファイルを開く";
-    } else {
-        finishGame();
-    }
+    localStorage.setItem("stage", stage);
+    localStorage.setItem("step", step);
+    localStorage.removeItem("mode");
+
+    loadQuestion();
+}
+
+function showFinal1() {
+    localStorage.setItem("stage", stage);
+    localStorage.setItem("step", step);
+    localStorage.setItem("mode", "final1");
+
+    document.getElementById("fileBox").style.display = "none";
+
+    document.getElementById("final").innerHTML =
+        "位置情報：札幌市〇〇区〇〇<br><br>" +
+        "暗号：『次は赤き記憶を辿れ』";
+
+    document.getElementById("nextBtn").style.display = "inline-block";
+}
+
+function showFinal2() {
+    localStorage.setItem("stage", stage);
+    localStorage.setItem("step", step);
+    localStorage.setItem("mode", "final2");
+
+    document.getElementById("fileBox").style.display = "none";
+
+    document.getElementById("final").innerHTML =
+        "暗号：『次は影を辿れ』";
+
+    document.getElementById("nextBtn3").style.display = "inline-block";
+}
+
+function showFinal3() {
+    localStorage.setItem("stage", stage);
+    localStorage.setItem("step", step);
+    localStorage.setItem("mode", "final3");
+
+    document.getElementById("fileBox").style.display = "none";
+
+    document.getElementById("final").innerHTML =
+        "暗号：";
+
+    showNotification();
 }
 
 function finishGame() {
@@ -307,6 +383,9 @@ function playMelody() {
 
 //次のファイルへ
 function goToFile(fileNumber, btnId) {
+
+    localStorage.removeItem("mode");
+
     stage = fileNumber;
     step = 0;
 
@@ -331,4 +410,29 @@ function showNotification() {
 
 function goMail() {
     location.href = "mail.html";
+}
+
+function resetGame() {
+    // 保存データ全部削除
+    localStorage.removeItem("stage");
+    localStorage.removeItem("step");
+    localStorage.removeItem("mode");
+
+    // もし他にもあれば一括でもOK
+    // localStorage.clear();
+
+    // 初期化
+    stage = 1;
+    step = 0;
+
+    // 画面リセット
+    document.getElementById("fileBox").style.display = "block";
+    document.getElementById("final").innerHTML = "";
+    document.getElementById("nextBtn").style.display = "none";
+    document.getElementById("nextBtn3").style.display = "none";
+
+    // 最初の問題へ
+    loadQuestion();
+
+    showMessage("リセット完了");
 }
