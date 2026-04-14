@@ -117,35 +117,49 @@ input {
 <div id="result"></div>
 
 <script>
-let time = 1800;
+let isCleared = localStorage.getItem("finalCleared") === "true";
+
+let endTime = localStorage.getItem("endTime");
+
+if(!endTime) {
+    // 初回だけ30分セット
+    endTime = Date.now() + 1800 * 1000;
+    localStorage.setItem("endTime", endTime);
+} else {
+    endTime = Number(endTime);
+}
+
 let timerActive = true;
 
 function updateTimer() {
     if(!timerActive) return;
 
-    const min = Math.floor(time / 60);
-    const sec = time % 60;
+    const now = Date.now();
+    const remaining = Math.floor((endTime - now) / 1000);
+
+    if(remaining <= 0) {
+        document.getElementById("timer").textContent = "00:00";
+        document.getElementById("result").textContent = "ウイルス放出完了…";
+        return;
+    }
+
+    const min = Math.floor(remaining / 60);
+    const sec = remaining % 60;
 
     document.getElementById("timer").textContent =
         `${min}:${sec.toString().padStart(2, "0")}`;
 
-    time--;
-
-    if(time >= 0) {
-        setTimeout(updateTimer, 1000);
-    } else {
-        document.getElementById("result").textContent =
-            "ウイルス放出完了…";
-    }
+    setTimeout(updateTimer, 1000);
 }
 
-updateTimer();
 
 /* ボタン押した時 */
 document.getElementById("launchBtn").addEventListener("click", () => {
     const ans = document.getElementById("finalAnswer").value;
 
     if(ans.includes("答え")) { // ←最終コードに変更
+
+        localStorage.setItem("finalCleared", "true");
 
         timerActive = false;
 
@@ -190,6 +204,56 @@ document.getElementById("launchBtn").addEventListener("click", () => {
         document.getElementById("result").textContent = "認証エラー";
     }
 });
+
+window.onload = () => {
+
+    if(localStorage.getItem("finalCleared") === "true") {
+
+        timerActive = false;
+
+        // 背景
+        document.body.style.background = "white";
+        document.body.style.color = "#00aa00";
+
+        // タイマー
+        const timer = document.getElementById("timer");
+        timer.textContent = "STOP";
+        timer.style.color = "#00aa00";
+        timer.style.textShadow = "none";
+
+        // ボタン
+        const btn = document.getElementById("launchBtn");
+        btn.style.background = "#00aa00";
+        btn.style.boxShadow = "0 8px 0 #006600, 0 0 20px #00aa00";
+        btn.style.border = "4px solid #006600";
+
+        // 入力
+        const input = document.getElementById("finalAnswer");
+        input.style.border = "2px solid #00aa00";
+        input.style.color = "#00aa00";
+        input.style.background = "#f0fff0";
+
+        // アイコン
+        const icon = document.getElementById("virusIcon");
+        icon.style.color = "#00aa00";
+
+        // 警告消す
+        const warning = document.querySelector(".warning");
+        if(warning) warning.style.display = "none";
+
+        // 結果
+        document.getElementById("result").innerHTML =
+            "✔ ウイルスの放出を停止しました<br><br>" +
+            "📍 ウイルスの場所：札幌市〇〇区〇〇";
+
+        document.getElementById("result").style.color = "#00aa00";
+
+    } else {
+        // ★ここでタイマー開始
+        updateTimer();
+    }
+};
+
 </script>
 
 </body>
