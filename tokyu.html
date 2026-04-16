@@ -293,8 +293,21 @@ function updateUI() {
 
     if (!current.locked) {
         box.classList.remove("locked");
-        status.textContent = "封鎖解除";
+
+        if (current.id === 10) {
+            status.textContent = "9階の封鎖解除";
+        } else if (current.id === 9) {
+            status.textContent = "8階の封鎖解除";
+        } else if (current.id === 8) {
+            status.textContent = "7階の封鎖解除";
+        } else if (current.id === 7) {
+            status.textContent = "6階・5階の封鎖解除";
+        } else {
+            status.textContent = "封鎖解除";
+        }
+
         status.style.color = "green";
+
     } else {
         box.classList.add("locked");
         status.textContent = "封鎖中";
@@ -313,6 +326,10 @@ function unlockAll() {
     w.style.color = "green";
 
     flashScreen();
+
+    setTimeout(() => {
+        alert("📡 通信接続...\n\n博士：よくやった…！\n全ての階の封鎖が解除された。\nこれで先へ進めるぞ！");
+    }, 500);
 }
 
 /* パスワード */

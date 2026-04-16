@@ -187,7 +187,7 @@ function analyze() {
                     <div class="multi-input">
 
                         <div class="input-block">
-                            <label>A</label>
+                            <label>Z</label>
                             <input id="f6_A">
                         </div>
 
