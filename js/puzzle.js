@@ -289,7 +289,7 @@ function showFinal1() {
 
     document.getElementById("final").innerHTML =
         "位置情報：札幌市〇〇区〇〇<br><br>" +
-        "暗号：『次は赤き記憶を辿れ』";
+        "暗号：あいことば";
 
     document.getElementById("nextBtn").style.display = "inline-block";
 }
@@ -302,7 +302,8 @@ function showFinal2() {
     document.getElementById("fileBox").style.display = "none";
 
     document.getElementById("final").innerHTML =
-        "暗号：『次は影を辿れ』";
+        "位置情報：札幌市〇〇区〇〇<br><br>" +
+        "暗号：さつまいも";
 
     document.getElementById("nextBtn3").style.display = "inline-block";
 }
@@ -315,7 +316,8 @@ function showFinal3() {
     document.getElementById("fileBox").style.display = "none";
 
     document.getElementById("final").innerHTML =
-        "暗号：";
+       "位置情報：札幌市〇〇区〇〇<br><br>" +
+        "暗号：なつやすみ";
 
     showNotification();
 }
