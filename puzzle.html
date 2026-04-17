@@ -182,7 +182,6 @@ footer {
     <a href="index.html">TOP NEWS</a>
     <a href="mailbox.html">MAIL BOX</a>
     <a href="puzzle.html">謎解きページ</a>
-    <a href="hint.html">速報</a>
 </nav>
 
 <button id="resetBtn" onclick="resetGame()">リセット</button>
@@ -192,11 +191,10 @@ footer {
     <h1>DETECTIVE FILE</h1>
 
     <div class="file" id="fileBox">
-        <h2 id="fileTitle">File 1</h2>
+        <h2 id="fileTitle">File A-1</h2>
 
         <p id="question">
-            この街の中心に立つ塔<br>
-            時を刻み 人々を見守る
+            File A-1は？<br>
         </p>
 
         <div id="pianoArea" style="display:none; margin-top:20px;">
@@ -248,8 +246,8 @@ footer {
         </div>
          <!-- ファイル２ -->
         <div id="imageArea" style="display:none; margin-top:20px;">
-            <img src="img/Component 1.png" style="width:45%; margin:5px;">
-            <img src="img/Component 1.png" style="width:45%; margin:5px;">
+            <img src="img/myoumu.png" style="width:45%; margin:5px;">①
+            <img src="img/sonata.jpg" style="width:45%; margin:5px;">②
 
             <div style="margin-top:10px;">
                 <input type="text" id="imgAnswer1" placeholder="画像①の答え">
@@ -258,18 +256,18 @@ footer {
         </div>
 
         <div id="abcArea" style="display:none; margin-top:20px;">
-            <input type="text" id="inputA" placeholder="A">
-            <input type="text" id="inputB" placeholder="B">
-            <input type="text" id="inputC" placeholder="C">
+            <input type="text" id="inputA" placeholder="X">
+            <input type="text" id="inputB" placeholder="Y">
+            <input type="text" id="inputC" placeholder="Z">
         </div>
 
         <!-- ファイル3 -->
         <!-- ファイル3（画像3枚） -->
         <div id="image3Area" style="display:none; margin-top:20px;">
 
-            <img src="img/Component 1.png" style="width:45%; margin:5px;">
-            <img src="img/Component 1.png" style="width:45%; margin:5px;">
-            <img src="img/Component 1.png" style="width:45%; margin:5px;">
+            <img src="img/jihankiA.jpeg" style="width:45%; margin:5px;">
+            <img src="img/jihankiB.jpeg" style="width:45%; margin:5px;">
+            <img src="img/jihankiC.jpeg" style="width:45%; margin:5px;">
 
             <div style="margin-top:10px;">
                 <input type="text" id="img3A" placeholder="A">

@@ -101,7 +101,7 @@ function analyze() {
 
             if (phoneUnlocked) {
                 problem.textContent = "";
-                result.innerHTML = `<div class="big-result">CDACHGEJBF</div>`;
+                result.innerHTML = `<div class="big-result">0HB0CEFAGI</div>`;
                 if (!phoneBtnShown) {
                     document.getElementById("phoneBtn").style.display = "block";
                     phoneBtnShown = true;
@@ -115,7 +115,7 @@ function analyze() {
             }
 
             // 通常状態
-            problem.textContent = "機密データは21のKにある";
+            problem.textContent = "選ばれし玩具の裏を見よ。機密データは、「64のJ」の中にある。";
 
             result.innerHTML = `
                 <input id="secretInput" placeholder="機密データを入力">
@@ -153,21 +153,25 @@ function analyze() {
     if (input === "7" || input === "7階") {
         hidePhoneBtn = true;
         fakeLoading(() => {
-            problem.textContent = "3つのコードを入力せよ";
+            problem.textContent = "バーコードをスキャンしキーワードを入力せよ";
 
             result.innerHTML = `
                 <div class="multi-input">
                     <div class="input-block">
-                        <label>1</label>
+                        <label>A</label>
                         <input id="f7_1">
                     </div>
                     <div class="input-block">
-                        <label>2</label>
+                        <label>B</label>
                         <input id="f7_2">
                     </div>
                     <div class="input-block">
-                        <label>3</label>
+                        <label>C</label>
                         <input id="f7_3">
+                    </div>
+                    <div class="input-block">
+                        <label>D</label>
+                        <input id="f7_4">
                     </div>
                 </div>
                 <button onclick="submitFloor7()">解析</button>
@@ -181,13 +185,13 @@ function analyze() {
         if (input === "6" || input === "6階") {
             hidePhoneBtn = true;
             fakeLoading(() => {
-                problem.textContent = "6つの機器を正しく対応させよ";
+                problem.textContent = "キーワードを入力せよ";
 
                 result.innerHTML = `
                     <div class="multi-input">
 
                         <div class="input-block">
-                            <label>Z</label>
+                            <label>A</label>
                             <input id="f6_A">
                         </div>
 
@@ -199,21 +203,6 @@ function analyze() {
                         <div class="input-block">
                             <label>C</label>
                             <input id="f6_C">
-                        </div>
-
-                        <div class="input-block">
-                            <label>D</label>
-                            <input id="f6_D">
-                        </div>
-
-                        <div class="input-block">
-                            <label>E</label>
-                            <input id="f6_E">
-                        </div>
-
-                        <div class="input-block">
-                            <label>F</label>
-                            <input id="f6_F">
                         </div>
 
                     </div>
@@ -238,17 +227,11 @@ function submitFloor6() {
     const A = document.getElementById("f6_A").value.trim();
     const B = document.getElementById("f6_B").value.trim();
     const C = document.getElementById("f6_C").value.trim();
-    const D = document.getElementById("f6_D").value.trim();
-    const E = document.getElementById("f6_E").value.trim();
-    const F = document.getElementById("f6_F").value.trim();
-
+    
     if (
-        A === "テレビ" &&
-        B === "カメラ" &&
-        C === "照明" &&
-        D === "洗濯機" &&
-        E === "冷蔵庫" &&
-        F === "炊飯器"
+        A === "フライパン" &&
+        B === "山荘" &&
+        C === "455"
     ) {
         fakeLoading(() => {
             problem.textContent = "";
@@ -272,8 +255,9 @@ function submitFloor7() {
     const a = normalize(document.getElementById("f7_1").value);
     const b = normalize(document.getElementById("f7_2").value);
     const c = normalize(document.getElementById("f7_3").value);
+    const d = normalize(document.getElementById("f7_4").value);
 
-    if (a === "09BLACK" && b === "L47" && c === "483924") {
+    if (a === "173" && b === "餃子ライス" && c === "41YELLOW" && d === "20") {
         fakeLoading(() => {
             problem.textContent = "赤と青の間にありし、文字列をスキャンせよ";
 
@@ -306,7 +290,7 @@ async function startScan() {
     // スキャンボタン押したら判定（簡易）
     setTimeout(() => {
         fakeLoading(() => {
-            result.innerHTML = `<div class="big-result">1234</div>`;
+            result.innerHTML = `<div class="big-result">5039</div>`;
             saveState();
         }, true);
     }, 2000);
@@ -319,7 +303,7 @@ function submitFloor8() {
     if (input === "ささみふらい") {
         fakeLoading(() => {
             problem.textContent = "";
-            result.innerHTML = `<div class="big-result">4623</div>`;
+            result.innerHTML = `<div class="big-result">111396</div>`;
         }, true);
     } else {
         fakeLoading(() => {
@@ -333,7 +317,7 @@ function submitFloor8() {
 function submitSecret() {
     fakeLoading(() => {
         problem.textContent = "";
-        result.innerHTML = `<div class="big-result">CDACHGEJBF</div>`;
+        result.innerHTML = `<div class="big-result">0HB0CEFAGI</div>`;
 
         // 電話ボタン表示
         if (!phoneBtnShown) {
@@ -424,7 +408,7 @@ window.addEventListener("load", () => {
 
         fakeLoading(() => {
             problem.textContent = "";
-            result.innerHTML = `<div class="big-result">CDACHGEJBF</div>`;
+            result.innerHTML = `<div class="big-result">0HB0CEFAGI</div>`;
             if (phoneUnlocked) {
                 if (!phoneBtnShown) {
                     document.getElementById("phoneBtn").style.display = "block";
@@ -438,7 +422,7 @@ window.addEventListener("load", () => {
 
     if (params.get("scan") === "ok") {
         fakeLoading(() => {
-            result.innerHTML = `<div class="big-result">1234</div>`;
+            result.innerHTML = `<div class="big-result">5039</div>`;
         }, true);
     }
 });

@@ -188,13 +188,13 @@ function press(n) {
         }
 
         if (n === "1") {
-            speak("では、C、B、E、Aを押してください。");
+            speak("では、C、G、F、Dを押してください。");
 
             number = "";
             setDisplay("通話中");
         }
 
-        if (number === "0532") {
+        if (number === "7538") {
             stage = 3;
 
             speak("解析中、成功しました。暗号は4、7、9、2、8です。");
@@ -237,7 +237,7 @@ function call() {
             setTimeout(() => {
                 setDisplay("通話中");
 
-                speak("暗号機密センターです。暗号を知りたい方は1を、一発ギャグを聞きたい方は2を、押してください。");
+                speak("暗号機密センターです。暗号を知りたいかたわ1を、一発ギャグを聞きたいかたわ2を、押してください。");
 
                 stage = 2;
                 number = "";
