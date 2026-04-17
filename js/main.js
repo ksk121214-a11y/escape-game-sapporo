@@ -103,7 +103,7 @@ if(document.body.id === "topPage"){
 
             urgentNews.innerHTML = `
             <div class="news-content">
-                        <img src="img/Component 1.png" alt="探偵死亡速報" class="news-img">
+                        <img src="img/tantei.jpg" alt="探偵死亡速報" class="news-img">
 
                         <div class="news-text">
 
@@ -147,7 +147,7 @@ if(document.body.id === "topPage"){
 
             urgentNews.innerHTML = `
             <div class="news-content">
-                        <img src="img/Component 1.png" alt="探偵死亡速報" class="news-img">
+                        <img src="img/tantei.jpg" alt="探偵死亡速報" class="news-img">
 
                         <div class="news-text">
 
@@ -334,8 +334,8 @@ if(document.body.id === "topPage"){
                     <span class="email-date">${new Date().toLocaleString("ja-JP")}</span>
                 </div>
                 <div class="email-body">
-                    ……そうか<br><br>
-                    君に託すしかない<br><br>
+                    ……そうか、巻き込んですまない<br><br>
+                    だが、君に託すしかない<br><br>
                     札幌を救ってくれ
                 </div>
                 `;
@@ -390,7 +390,7 @@ if(document.body.id === "topPage"){
                             <span class="email-date">${new Date().toLocaleString("ja-JP")}</span>
                         </div>
                         <div class="email-body">
-                            ……まずい<br><br>
+                            ……まずい、君はさっぽろ東急百貨店にいると言っていたな<br><br>
 
                             これは通常の封鎖じゃない<br><br>
 
