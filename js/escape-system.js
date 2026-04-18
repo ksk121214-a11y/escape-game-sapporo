@@ -115,7 +115,7 @@ function analyze() {
             }
 
             // 通常状態
-            problem.textContent = "選ばれし玩具の裏を見よ。機密データは、「64のJ」の中にある。";
+            problem.textContent = "選ばれし玩具のバンド名。機密データは、「64のJ」にある。";
 
             result.innerHTML = `
                 <input id="secretInput" placeholder="機密データを入力">
