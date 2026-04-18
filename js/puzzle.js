@@ -6,12 +6,12 @@ let step = 0;
 const data = {
     1: [
         { q: "File 1-Aは何？", a: "東札幌" },
-        { q: "File 1-Aの出口で最初に見える赤色のものは？ここ帰る", a: "答え" },
+        { q: "File 1-Aの2番出口を出る前のピアハーブの看板は何色？", a: "オレンジ" },
 
         // ←ここが音ギミック
         { q: "音を聞け\n答えを導き出せ", a: "ラソラ", type: "piano" },
 
-        { q: "RASORAに向かえ File 1-D", a: "ピンク", type: "final" }
+        { q: "RASORAに向かえ File 1-D", a: "青", type: "final" }
     ],
     2: [
         { q: "この2つの画像の作品名は？", a: ["妙夢", "白い風のソナタ"], type: "image2" },
@@ -288,7 +288,8 @@ function showFinal1() {
     document.getElementById("fileBox").style.display = "none";
 
     document.getElementById("final").innerHTML =
-        "位置情報：札幌市〇〇区〇〇<br><br>" +
+        "位置情報：〒003-0002 北海道札幌市白石区東札幌２条２丁目４<br><br>" +
+        "東札幌駅改札出てすぐの一番出口<br><br>" +
         "暗号：あいことば";
 
     document.getElementById("nextBtn").style.display = "inline-block";
@@ -302,7 +303,8 @@ function showFinal2() {
     document.getElementById("fileBox").style.display = "none";
 
     document.getElementById("final").innerHTML =
-        "位置情報：札幌市〇〇区〇〇<br><br>" +
+        "位置情報：〒060-0806 北海道札幌市北区北６条西４丁目<br><br>" +
+        "札幌駅北口切符売り場の近く<br><br>" +
         "暗号：さつまいも";
 
     document.getElementById("nextBtn3").style.display = "inline-block";
@@ -316,7 +318,8 @@ function showFinal3() {
     document.getElementById("fileBox").style.display = "none";
 
     document.getElementById("final").innerHTML =
-       "位置情報：札幌市〇〇区〇〇<br><br>" +
+       "位置情報：〒060-0063 北海道札幌市中央区南３条西４丁目１２−１<br><br>" +
+       "ポールタウンからメガドンキ入り口付近<br><br>" +
         "暗号：なつやすみ";
 
     showNotification();
